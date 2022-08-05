@@ -4,6 +4,9 @@ package com.pfa.ecommerce;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Ce projet est créé par Abdelaziz CHARFI
+ */
 @SpringBootApplication
 public class ECommerceApplication{
 	/*
