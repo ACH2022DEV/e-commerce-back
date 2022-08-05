@@ -21,17 +21,17 @@ public class DevisController {
 	  public List<Devis> list(){ return devisService.getAll(); }
 
 	@GetMapping("/{id}")
-	  public Optional<Devis> getDevis(@PathVariable Integer Id){
-		  return devisService.findById(Id); }
+	  public Optional<Devis> getDevis(@PathVariable Long id){
+		  return devisService.findById(id); }
 
 	  @PostMapping
 	  public Devis save(@RequestBody Devis devis){ return devisService.save(devis); }
 
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable Integer Id){ devisService.delete(Id); }
+	public void delete(@PathVariable Long id){ devisService.delete(id); }
 
-	@PutMapping("/{id}")
-	 public Devis update(@PathVariable Integer Id,@RequestBody Devis devis){
-		  return devisService.update(Id, devis); }
+	@PutMapping()
+	 public Devis update(@RequestBody Devis devis){
+		  return devisService.update(devis); }
 
 }

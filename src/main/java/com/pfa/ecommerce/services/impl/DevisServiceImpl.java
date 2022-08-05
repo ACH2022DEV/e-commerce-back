@@ -27,7 +27,7 @@ public class DevisServiceImpl implements IDevisService {
         return DevisMapper.INSTANCE.mapToModels(devisRepository.findAll());
     }
 
-    public Optional<Devis> findById(Integer id) {
+    public Optional<Devis> findById(Long id) {
         return devisRepository.findById(id).map(DevisMapper.INSTANCE::mapToModel);
     }
 
@@ -35,13 +35,13 @@ public class DevisServiceImpl implements IDevisService {
 
          return DevisMapper.INSTANCE.mapToModel(devisRepository.save(DevisMapper.INSTANCE.mapToEntity(devis)));
     }
-    public Devis update( Integer CodeDevis, Devis devis) {
+    public Devis update(  Devis devis) {
 
          return DevisMapper.INSTANCE.mapToModel(devisRepository.save(DevisMapper.INSTANCE.mapToEntity(devis)));
         }
 
 
-     public boolean delete(Integer CodeDevis) {
+     public boolean delete(Long CodeDevis) {
         Optional<DevisEntity> ar =devisRepository.findById(CodeDevis);
         if(ar.isPresent()) {
         devisRepository.deleteById(CodeDevis); }

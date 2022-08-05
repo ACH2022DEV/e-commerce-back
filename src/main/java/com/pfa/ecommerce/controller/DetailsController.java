@@ -20,19 +20,19 @@ public class DetailsController {
     public List<Details> list(){ return iDetailsService.getAll(); }
 
     @GetMapping("/{id}")
-    public Optional<Details> getFacture(@PathVariable Integer Id){
-        return iDetailsService.findById(Id); }
+    public Optional<Details> getFacture(@PathVariable Long id){
+        return iDetailsService.findById(id); }
 
     @PostMapping
     public Details save(@RequestBody Details details){
         return iDetailsService.save(details); }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer Id){ iDetailsService.delete(Id); }
+    public void delete(@PathVariable Long id){ iDetailsService.delete(id); }
 
-    @PutMapping("/{id}")
-    public Details update(@PathVariable Integer Id,@RequestBody Details details){
-        return iDetailsService.update(Id, details); }
+    @PutMapping()
+    public Details update(@RequestBody Details details){
+        return iDetailsService.update( details); }
 
 
 }

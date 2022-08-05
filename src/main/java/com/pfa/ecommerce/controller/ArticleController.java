@@ -20,19 +20,19 @@ public class ArticleController {
 	  public List<Article> list() { return articelService.getAll(); }
 
 	@GetMapping("/{id}")
-	  public Optional<Article> getArticle(@PathVariable Integer Id) { return
-	  articelService.findById(Id); }
+	  public Optional<Article> getArticle(@PathVariable Long id) { return
+	  articelService.findById(id); }
 
 	@PostMapping
 	  public Article save(@RequestBody Article article) {
 		  return articelService.save(article); }
 
 	@DeleteMapping("/{id}")
-	  public void delete(@PathVariable Integer Id) { articelService.delete(Id); }
+	  public void delete(@PathVariable Long id) { articelService.delete(id); }
 
-	@PutMapping("/{id}")
-	public Article update(@PathVariable Integer Id, @RequestBody Article article) {
-		  return articelService.update(Id, article); }
+	@PutMapping()
+	public Article update( @RequestBody Article article) {
+		  return articelService.update( article); }
 
 
 }

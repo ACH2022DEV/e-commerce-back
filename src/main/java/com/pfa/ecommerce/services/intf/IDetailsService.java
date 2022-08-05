@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IDetailsService {
-    public boolean delete(Integer Code);
-    public Details update(Integer Code , Details details);
+    public boolean delete(Long Code);
+    public Details update( Details details);
     public Details save(Details details);
-    public Optional<Details> findById(Integer id);
+    public Optional<Details> findById(Long id);
     public List<Details> getAll();
     
 }

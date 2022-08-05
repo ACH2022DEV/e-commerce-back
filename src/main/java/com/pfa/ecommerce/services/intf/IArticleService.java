@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface IArticleService {
     public List<Article> getAll();
-    public Optional<Article> findById(Integer id);
+    public Optional<Article> findById(Long id);
     public Article save(Article article);
-    public Article update(Integer codeArticle,Article article);
-    public boolean delete(Integer codeArticle);
+    public Article update(Article article);
+    public boolean delete(Long codeArticle);
 }

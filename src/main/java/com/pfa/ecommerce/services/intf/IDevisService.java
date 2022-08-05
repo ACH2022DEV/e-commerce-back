@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IDevisService {
-    public Devis update(Integer CodeDevis, Devis devis);
-    public boolean delete(Integer CodeDevis);
+    public Devis update( Devis devis);
+    public boolean delete(Long CodeDevis);
     public Devis save(Devis devis);
-    public Optional<Devis> findById(Integer id);
+    public Optional<Devis> findById(Long id);
     public List<Devis> getAll();
 }

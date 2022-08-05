@@ -28,7 +28,7 @@ public class DetailsServiceImpl implements IDetailsService {
         return DetailsMapper.INSTANCE.mapToModels(detailsRepository.findAll());
     }
 
-    public Optional<Details> findById(Integer id) {
+    public Optional<Details> findById(Long id) {
         return detailsRepository.findById(id).map(DetailsMapper.INSTANCE::mapToModel);
     }
 
@@ -36,13 +36,13 @@ public class DetailsServiceImpl implements IDetailsService {
 
         return DetailsMapper.INSTANCE.mapToModel(detailsRepository.save(DetailsMapper.INSTANCE.mapToEntity(details)));
     }
-    public Details update( Integer Code , Details details) {
+    public Details update(  Details details) {
 
             return DetailsMapper.INSTANCE.mapToModel(detailsRepository.save(DetailsMapper.INSTANCE.mapToEntity(details)));
         }
 
 
-  public boolean delete(Integer Code) {
+  public boolean delete(Long Code) {
         Optional<DetailsEntity> ar =detailsRepository.findById(Code);
         if(ar.isPresent()) {
             detailsRepository.deleteById(Code); }

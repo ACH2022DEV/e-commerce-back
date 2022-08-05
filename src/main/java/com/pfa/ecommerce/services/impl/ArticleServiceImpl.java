@@ -28,7 +28,7 @@ public class ArticleServiceImpl  implements IArticleService {
         return ArticleMapper.INSTANCE.mapToModels(repository.findAll());
     }
 
-    public Optional<Article> findById(Integer id) {
+    public Optional<Article> findById(Long id) {
         return repository.findById(id).map(ArticleMapper.INSTANCE::mapToModel);
     }
 
@@ -38,14 +38,14 @@ public class ArticleServiceImpl  implements IArticleService {
 
         return ArticleMapper.INSTANCE.mapToModel(repository.save(ArticleMapper.INSTANCE.mapToEntity(article)));
     }
-    public Article update(Integer codeArticle,Article article) {
+    public Article update(Article article) {
 
             return ArticleMapper.INSTANCE.mapToModel(repository.save(ArticleMapper.INSTANCE.mapToEntity(article)));
         }
 
 
 
-    public boolean delete(Integer codeArticle) {
+    public boolean delete(Long codeArticle) {
         Optional<ArticleEntity> ar =repository.findById(codeArticle); if(ar.isPresent()) {
         repository.deleteById(codeArticle);
         }
