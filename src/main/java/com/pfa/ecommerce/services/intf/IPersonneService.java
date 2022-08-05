@@ -14,12 +14,16 @@ public interface IPersonneService {
      */
     public Personne save(Personne personne);
 
+    /**
+     * Cette fonction peremt de retourner la liste des personnes
+     * @return
+     */
     public List<Personne> findAll();
 
     public Optional<Personne> findById(Long id);
 
 
-    public Personne update(Long id, Personne personne);
+    public Personne update(Personne personne);
 
 
     public boolean delete(Long id);

@@ -1,9 +1,7 @@
 package com.pfa.ecommerce.controller;
 
 import com.pfa.ecommerce.model.Details;
-import com.pfa.ecommerce.model.Facture;
 import com.pfa.ecommerce.services.intf.IDetailsService;
-import com.pfa.ecommerce.services.intf.IFactureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/details")
+@RequestMapping("/details")
 public class DetailsController {
 
 

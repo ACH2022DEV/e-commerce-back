@@ -1,17 +1,17 @@
 package com.pfa.ecommerce.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.pfa.ecommerce.model.Personne;
 import com.pfa.ecommerce.services.intf.IPersonneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/personne")
+@RequestMapping("/personne")
 public class PersonneController {
 	@Autowired
 	IPersonneService personneService;
@@ -37,9 +37,9 @@ public class PersonneController {
 		personneService.delete(id);
 	}
 
-	@PutMapping("/{id}")
-	public Personne update(@PathVariable Long id, @RequestBody Personne personne) {
-		return personneService.update(id, personne);
+	@PutMapping()
+	public Personne update(@RequestBody Personne personne) {
+		return personneService.update(personne);
 	}
 
 }

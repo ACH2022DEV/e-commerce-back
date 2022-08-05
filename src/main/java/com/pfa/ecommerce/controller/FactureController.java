@@ -10,29 +10,37 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/facture")
+@RequestMapping("/facture")
 public class FactureController {
 
 
-	  @Autowired
-	  IFactureService factureService;
+    @Autowired
+    IFactureService factureService;
 
-	 @GetMapping
-	 public List<Facture> list(){ return factureService.getAll(); }
+    @GetMapping
+    public List<Facture> list() {
+        return factureService.getAll();
+    }
 
-	@GetMapping("/{id}")
-	 public Optional<Facture> getFacture(@PathVariable Integer Id){
-		 return factureService.findById(Id); }
+    @GetMapping("/{id}")
+    public Optional<Facture> getFacture(@PathVariable Long id) {
+        return factureService.findById(id);
+    }
 
-	@PostMapping
-	  public Facture save(@RequestBody Facture facture){ return factureService.save(facture); }
+    @PostMapping
+    public Facture save(@RequestBody Facture facture) {
+        return factureService.save(facture);
+    }
 
-	@DeleteMapping("/{id}")
-	  public void delete(@PathVariable Integer Id){ factureService.delete(Id); }
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        factureService.delete(id);
+    }
 
-	@PutMapping("/{id}")
-	  public Facture update(@PathVariable Integer Id,@RequestBody Facture facture){ return
-	  factureService.update(Id, facture); }
+    @PutMapping()
+    public Facture update(@RequestBody Facture facture) {
+        return factureService.update(facture);
+    }
 
 
 }

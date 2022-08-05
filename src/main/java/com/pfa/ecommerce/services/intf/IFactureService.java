@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface IFactureService  {
     public List<Facture> getAll();
-    public Optional<Facture> findById(Integer id);
+    public Optional<Facture> findById(Long id);
     public Facture save(Facture facture);
-    public Facture update(Integer Id,Facture facture);
-    public Boolean delete(Integer code);
+    public Facture update(Facture facture);
+    public Boolean delete(Long code);
 
 }
