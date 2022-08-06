@@ -30,7 +30,7 @@ public class DevisController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id){ devisService.delete(id); }
 
-	@PutMapping()
+	@PutMapping
 	 public Devis update(@RequestBody Devis devis){
 		  return devisService.update(devis); }
 

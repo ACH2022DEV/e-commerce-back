@@ -30,7 +30,7 @@ public class ArticleController {
 	@DeleteMapping("/{id}")
 	  public void delete(@PathVariable Long id) { articelService.delete(id); }
 
-	@PutMapping()
+	@PutMapping
 	public Article update( @RequestBody Article article) {
 		  return articelService.update( article); }
 

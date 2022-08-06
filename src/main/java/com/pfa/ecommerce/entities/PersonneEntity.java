@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.pfa.ecommerce.model.Facture;
 import lombok.AllArgsConstructor;
@@ -23,24 +26,43 @@ import lombok.ToString;
 @ToString
 public class PersonneEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	
-	@Id()
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    private static final long serialVersionUID = 1L;
 
-	@Column(nullable = false)
-	private String nom;
-	@Column(nullable = false)
-	private String prenom;
-	@Column(nullable = false)
-	private String adress;
-	@Column(nullable = false)
-	private String tel;
 
-	/*@OneToMany(mappedBy="personne",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	 @JoinColumn(name="personne_id")
-	 private List<Facture> factures ;
-*/
+    @Id()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String nom;
+
+    @Column(nullable = false)
+    private String prenom;
+
+    @Column(nullable = false)
+    private String adress;
+
+    @Column(nullable = false)
+    private String tel;
+
+
+    @NotBlank
+    @Size(max = 20)
+    private String username;
+
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
+
+    @NotBlank
+    @Size(max = 120)
+    private String password;
+
+
+    @ManyToOne
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private RoleEntity role;
 }

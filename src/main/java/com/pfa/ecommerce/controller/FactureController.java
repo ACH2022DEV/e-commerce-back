@@ -37,7 +37,7 @@ public class FactureController {
         factureService.delete(id);
     }
 
-    @PutMapping()
+    @PutMapping
     public Facture update(@RequestBody Facture facture) {
         return factureService.update(facture);
     }

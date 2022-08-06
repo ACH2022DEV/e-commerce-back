@@ -37,7 +37,7 @@ public class PersonneController {
 		personneService.delete(id);
 	}
 
-	@PutMapping()
+	@PutMapping
 	public Personne update(@RequestBody Personne personne) {
 		return personneService.update(personne);
 	}

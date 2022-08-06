@@ -1,5 +1,6 @@
 package com.pfa.ecommerce.entities;
 
+import com.pfa.ecommerce.model.Personne;
 import lombok.*;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Devis")
+@Table(name = "Devis")
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,31 +17,27 @@ import javax.persistence.*;
 @ToString
 public class DevisEntity implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Id()
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long codedevis;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    @Id()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long codedevis;
 
+    @Column(nullable = false)
+    private Integer quantite;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "personne_id", nullable = false)
+    private PersonneEntity personne;
 
-
-	@Column(nullable=false)
-	private Integer codeArticle;
-	@Column(nullable=false)
-	private Integer quantite;
-	
-	
-	
-	/*@ManyToMany()
-	@JoinTable(name="Devise_articles",joinColumns=@JoinColumn(name="codedevise"),
-	inverseJoinColumns=@JoinColumn(name="codeArticle"))
-	private List<ArticleEntity> articles;
-*/
-
-
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "r_devi_article", joinColumns = {
+            @JoinColumn(name = "codedevis", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "codeArticle",
+                    nullable = false, updatable = false)})
+    private List<ArticleEntity> articles;
 
 
 }

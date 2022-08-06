@@ -2,17 +2,13 @@ package com.pfa.ecommerce.services.impl;
 
 import com.pfa.ecommerce.entities.DevisEntity;
 import com.pfa.ecommerce.mappers.DevisMapper;
-import com.pfa.ecommerce.mappers.PersonneMapper;
-import com.pfa.ecommerce.model.Details;
 import com.pfa.ecommerce.model.Devis;
 import com.pfa.ecommerce.repository.DevisRepository;
-import com.pfa.ecommerce.services.intf.IDetailsService;
 import com.pfa.ecommerce.services.intf.IDevisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

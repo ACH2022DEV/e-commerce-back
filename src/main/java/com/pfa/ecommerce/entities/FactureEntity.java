@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="facture")
+@Table(name = "facture")
 @Data
 @Builder
 @AllArgsConstructor
@@ -20,34 +20,31 @@ import java.util.List;
 public class FactureEntity implements Serializable {
 
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    @Id()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long code;
+
+    @Column(nullable = false)
+    private Integer montantTotal;
 
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Id()
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long code;
-	@Column(nullable=false)
-	private Integer montantTotal;
-	@Column(nullable=false)
-	private Integer id_detail;
-	
-	
-	/*@ManyToOne
-	private Personne personne;*/
-	
-	
-	/*@ManyToOne
-	private Devis devis;
-	
-	
-	@ManyToMany()
-	@JoinTable(name="factures_articles",joinColumns=@JoinColumn(name="code"),
-	inverseJoinColumns=@JoinColumn(name="codeArticle"))
-	private List<ArticleEntity> articles;
-*/
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "personne_id", nullable = false)
+	private PersonneEntity personne;
+
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "r_facture_article", joinColumns = {
+            @JoinColumn(name = "codefacture", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "codeArticle",
+                    nullable = false, updatable = false)})
+    private List<ArticleEntity> articles;
 
 
 }

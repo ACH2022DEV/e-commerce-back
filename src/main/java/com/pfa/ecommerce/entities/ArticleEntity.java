@@ -29,34 +29,24 @@ public class ArticleEntity implements Serializable{
 
 	@Column(nullable=false)
 	private String description;
+
 	@Column(nullable=false)
 	private String photo;
+
 	@Column(nullable=false)
 	private String paysOrigine;
+
 	@Column(nullable=false)
 	private Integer prix;
+
 	@Column(nullable=false)
 	private Integer tva;
+
 	@Column(nullable=false)
 	private Integer remise;
+
 	@Column(nullable=false)
 	private Integer quantite;
-	
-	
-	
-	/*@ManyToMany()
-	@JoinTable(name="factures_articles",joinColumns=@JoinColumn(name="codeArticle"),
-	inverseJoinColumns=@JoinColumn(name="code"))
-	private List<FactureEntity> factures;
 
-	
-	@ManyToMany()
-	@JoinTable(name="Devise_articles",joinColumns=@JoinColumn(name="codeArticle"),
-	inverseJoinColumns=@JoinColumn(name="codedevise"))
-	private List<DevisEntity> devises;
-*/
-
-	
-	
 
 }
