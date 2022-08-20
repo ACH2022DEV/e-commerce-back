@@ -1,5 +1,6 @@
 package com.pfa.ecommerce.security.jwt;
 
+import com.pfa.ecommerce.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +14,10 @@ import java.util.Date;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${proxiBanque.app.jwtSecret}")
+    @Value("${ecommerce.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${proxiBanque.app.jwtExpirationMs}")
+    @Value("${ecommerce.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {

@@ -2,6 +2,8 @@ package com.pfa.ecommerce.model;
 
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,4 +19,4 @@ public class Article {
     private Integer tva;
     private Integer remise;
     private Integer quantite;
-}
+    private List<Images> images;

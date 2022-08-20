@@ -47,6 +47,12 @@ public class ArticleEntity implements Serializable{
 
 	@Column(nullable=false)
 	private Integer quantite;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "image_article", joinColumns = {
+			@JoinColumn(name = "codeArticle", nullable = false, updatable = false)},
+			inverseJoinColumns = {@JoinColumn(name = "image_id",
+					nullable = false, updatable = false)})
+	private List<ImagesEntity> images;
 
 
 }

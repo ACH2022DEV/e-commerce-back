@@ -39,10 +39,10 @@ public class PersonneEntity implements Serializable {
     @Column(nullable = false)
     private String prenom;
 
-    @Column(nullable = false)
+    @Column()
     private String adress;
 
-    @Column(nullable = false)
+    @Column()
     private String tel;
 
 

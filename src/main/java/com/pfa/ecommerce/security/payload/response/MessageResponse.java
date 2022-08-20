@@ -1,4 +1,4 @@
-package org.formation.proxiBanque.security.payload.response;
+package com.pfa.ecommerce.security.payload.response;
 
 public class MessageResponse {
 	private String message;
