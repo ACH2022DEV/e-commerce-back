@@ -1,10 +1,23 @@
 package com.pfa.ecommerce.controller;
 
+import com.pfa.ecommerce.entities.ERole;
+import com.pfa.ecommerce.entities.PersonneEntity;
 import com.pfa.ecommerce.entities.RoleEntity;
-import org.formation.proxiBanque.security.payload.response.JwtResponse;
-import org.formation.proxiBanque.security.payload.response.MessageResponse;
+import com.pfa.ecommerce.repository.PersonneRepository;
+import com.pfa.ecommerce.repository.RoleRepository;
+import com.pfa.ecommerce.security.jwt.JwtUtils;
+import com.pfa.ecommerce.security.payload.request.LoginRequest;
+import com.pfa.ecommerce.security.payload.request.SignupRequest;
+import com.pfa.ecommerce.security.payload.response.JwtResponse;
+import com.pfa.ecommerce.security.payload.response.MessageResponse;
+import com.pfa.ecommerce.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,10 +32,10 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
+    PersonneRepository userRepository;
 
     @Autowired
-    RoleEntity Repository;
+    RoleRepository roleRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -40,11 +53,11 @@ public class AuthController {
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> RoleEntity s = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
+        List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(
-                new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), RoleEntity s));
+                new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
     }
 
     @PostMapping(value = "/register", consumes = "application/json")
@@ -58,41 +71,45 @@ public class AuthController {
         }
 
         // Create new user's account
-        PersonneEntity PersonneEntity = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+        PersonneEntity user = PersonneEntity.builder()
+                .nom(signUpRequest.getNom())
+                .prenom(signUpRequest.getPrenom())
+                .username(signUpRequest.getUsername())
+                .email(signUpRequest.getEmail())
+                .password(encoder.encode(signUpRequest.getPassword()))
+                .build();
 
-        String strRoleEntity = signUpRequest.getRoleEntity();
-        RoleEntity RoleEntity;
+        String strRole = signUpRequest.getRole();
+        RoleEntity role;
 
-        if (strRoleEntity == null) {
-            com.pfa.ecommerce.entities.RoleEntity userRoleEntity = RoleEntity
-            Repository.findByName(ERoleEntity.RoleEntity _USER)
-                    .orElseThrow(() -> new RuntimeException("Error: RoleEntity  is not found."));
-            RoleEntity = userRoleEntity;
+        if (strRole == null) {
+            RoleEntity userRole = roleRepository.findByName(ERole.ROLE_USER)
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            role = userRole;
         } else {
-            switch (strRoleEntity) {
+            switch (strRole) {
                 case "admin":
-                    RoleEntity adminRoleEntity = RoleEntity Repository.findByName(ERoleEntity.RoleEntity _ADMIN)
-                        .orElseThrow(() -> new RuntimeException("Error: RoleEntity  is not found."));
-                    RoleEntity = adminRoleEntity;
+                    RoleEntity adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    role = adminRole;
 
                     break;
                 case "gerant":
-                    RoleEntity gerantRoleEntity = RoleEntity Repository.findByName(ERoleEntity.RoleEntity _GERANT)
-                        .orElseThrow(() -> new RuntimeException("Error: RoleEntity  is not found."));
-                    RoleEntity = gerantRoleEntity;
+                    RoleEntity gerantRole = roleRepository.findByName(ERole.ROLE_GERANT)
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    role = gerantRole;
 
                     break;
                 default:
-                    RoleEntity userRoleEntity = RoleEntity Repository.findByName(ERoleEntity.RoleEntity _USER)
-                        .orElseThrow(() -> new RuntimeException("Error: RoleEntity  is not found."));
-                    RoleEntity = userRoleEntity;
+                    RoleEntity userRole = roleRepository.findByName(ERole.ROLE_USER)
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    role = userRole;
             }
         }
 
-        user.setRoleEntity(RoleEntity);
+        user.setRole(role);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("PersonneEntity registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 }

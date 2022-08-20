@@ -8,31 +8,39 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
 
-	  @Autowired
-	   IArticleService articelService;
+    @Autowired
+    IArticleService articelService;
 
-	@GetMapping
-	  public List<Article> list() { return articelService.getAll(); }
+    @GetMapping
+    public List<Article> list() {
+        return articelService.getAll();
+    }
 
-	@GetMapping("/{id}")
-	  public Optional<Article> getArticle(@PathVariable Long id) { return
-	  articelService.findById(id); }
+    @GetMapping("/{id}")
+    public Optional<Article> getArticle(@PathVariable Long id) {
+        return
+                articelService.findById(id);
+    }
 
-	@PostMapping
-	  public Article save(@RequestBody Article article) {
-		  return articelService.save(article); }
+    @PostMapping
+    public Article save(@RequestBody Article article) {
+        return articelService.save(article);
+    }
 
-	@DeleteMapping("/{id}")
-	  public void delete(@PathVariable Long id) { articelService.delete(id); }
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        articelService.delete(id);
+    }
 
-	@PutMapping
-	public Article update( @RequestBody Article article) {
-		  return articelService.update( article); }
+    @PutMapping
+    public Article update(@RequestBody Article article) {
+        return articelService.update(article);
+    }
 
 
 }

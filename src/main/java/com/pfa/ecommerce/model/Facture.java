@@ -2,16 +2,18 @@ package com.pfa.ecommerce.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class Facture {
+    private static final long serialVersionUID = 1L;
+
     private Long code;
-
     private Integer montantTotal;
-
-    private Integer id_detail;
+    private Personne personne;
+    private List<Article> articles;
 }

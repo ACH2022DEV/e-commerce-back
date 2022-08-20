@@ -1,11 +1,13 @@
 package com.pfa.ecommerce.model;
 
+import com.pfa.ecommerce.entities.ERole;
+import com.pfa.ecommerce.entities.RoleEntity;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Data
 @Builder
@@ -23,5 +25,15 @@ public class Personne {
     private String adress;
 
     private String tel;
+
+    private String username;
+
+
+    private String email;
+
+
+    private String password;
+
+    private RoleEntity role;
 
 }

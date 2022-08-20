@@ -1,9 +1,9 @@
 package com.pfa.ecommerce.config;
 
 import com.pfa.ecommerce.entities.ERole;
-import org.formation.proxiBanque.security.jwt.AuthEntryPointJwt;
-import org.formation.proxiBanque.security.jwt.AuthTokenFilter;
-import org.formation.proxiBanque.security.services.UserDetailsServiceImpl;
+import com.pfa.ecommerce.security.jwt.AuthEntryPointJwt;
+import com.pfa.ecommerce.security.jwt.AuthTokenFilter;
+import com.pfa.ecommerce.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,10 +57,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers("/agence/**").permitAll().antMatchers("/employe/**").hasAnyAuthority(gerantRole, adminRole)
-                .antMatchers("/client/**").permitAll().antMatchers("/compte/**")
-                .hasAnyAuthority(userRole, adminRole).antMatchers("/auth/**").permitAll().anyRequest().authenticated();
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                .antMatchers("/**/swagger-*/**").permitAll()
+                .antMatchers("/**/api-docs/**").permitAll()
+                .antMatchers("/agence/**").permitAll()
+                .antMatchers("/employe/**")
+                .hasAnyAuthority(gerantRole, adminRole)
+                .antMatchers("/client/**")
+                .permitAll().antMatchers("/compte/**")
+                .hasAnyAuthority(userRole, adminRole)
+                .antMatchers("/auth/**").permitAll().anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

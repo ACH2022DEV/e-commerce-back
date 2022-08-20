@@ -1,4 +1,4 @@
-package org.formation.proxiBanque.security.payload.response;
+package com.pfa.ecommerce.security.payload.response;
 
 import java.util.List;
 
