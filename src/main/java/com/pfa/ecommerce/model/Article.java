@@ -20,3 +20,23 @@ public class Article {
     private Integer remise;
     private Integer quantite;
     private List<Images> images;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

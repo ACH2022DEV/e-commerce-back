@@ -14,4 +14,7 @@ public class Images {
     private String type;
 
     private byte[] picbyte;
+
+    public Images(String fileName, String contentType, byte[] bytes) {
+    }
 }
