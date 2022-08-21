@@ -12,17 +12,27 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Id;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class ImagesServiceImpl  implements IimagesService {
     @Autowired
     ImagesRepository imagesRepository;
-    public Images UploadImage(MultipartFile file) throws IOException{
-        String fileName=file.getOriginalFilename();
-        Images images=new Images(fileName,file.getContentType(), file.getBytes());
-        return ImagesMapper.INSTANCE.mapToModel(imagesRepository.save(ImagesMapper.INSTANCE.mapToEntity(images)));
+    public Images UploadImage(MultipartFile [] file) throws IOException {
+
+            Set<Images> images=Uplod(file);
+            return ImagesMapper.INSTANCE.mapToModel(imagesRepository.save(ImagesMapper.INSTANCE.mapToEntity((Images) images)));
+
+    }
+
+    public Set<Images> Uplod(MultipartFile [] multipartFiles) throws IOException {
+
+            Set<Images> images=new HashSet<>();
+        for (MultipartFile file: multipartFiles){
+            Images image = new Images(file.getOriginalFilename(), file.getContentType(), file.getBytes());
+            images.add(image);
+        }
+        return images;
+
     }
     public Optional<Images> getImage(long id){
         Optional<ImagesEntity> images= imagesRepository.findById(id);

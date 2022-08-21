@@ -30,7 +30,7 @@ public class ArticleController {
 
 	@PostMapping
 	  public Article save(@RequestParam("produit") Article article,
-						  @RequestParam("file")MultipartFile  file) throws IOException {
+						  @RequestParam("file")MultipartFile []  file) throws IOException {
 		   Images img= iimagesService.UploadImage(file);
 		     article.setImages((List<Images>) img);
 		  return articelService.save(article); }
