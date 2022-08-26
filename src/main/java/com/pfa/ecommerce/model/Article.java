@@ -1,5 +1,6 @@
 package com.pfa.ecommerce.model;
 
+import com.pfa.ecommerce.entities.PanierEntity;
 import lombok.*;
 
 import java.util.List;
@@ -13,13 +14,18 @@ public class Article {
 
     private Long codeArticle;
     private String description;
-    private String photo;
     private String paysOrigine;
     private Integer prix;
     private Integer tva;
     private Integer remise;
     private Integer quantite;
     private List<Images> images;
+    //la nouvelle modification
+    private List<DevisArticle> devis;
+    private List<ArticleFacture> facture;
+    private List<Panier> panier;
+
+
 }
 
 

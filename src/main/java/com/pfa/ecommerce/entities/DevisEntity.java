@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -25,19 +26,15 @@ public class DevisEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codedevis;
 
-    @Column(nullable = false)
-    private Integer quantite;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personne_id", nullable = false)
     private PersonneEntity personne;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "r_devi_article", joinColumns = {
-            @JoinColumn(name = "codedevis", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "codeArticle",
-                    nullable = false, updatable = false)})
-    private List<ArticleEntity> articles;
+
+    @OneToMany(mappedBy = "devis")
+    private List<DevisArticleEntity> articles;
+
 
 
 }

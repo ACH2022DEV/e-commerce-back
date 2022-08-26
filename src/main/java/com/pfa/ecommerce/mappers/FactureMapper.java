@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-@Mapper
+@Mapper(uses = ArticleFactureMapper.class)
 public interface FactureMapper {
     FactureMapper INSTANCE = Mappers.getMapper(FactureMapper.class);
 

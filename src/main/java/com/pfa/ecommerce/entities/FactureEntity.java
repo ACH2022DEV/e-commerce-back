@@ -39,12 +39,15 @@ public class FactureEntity implements Serializable {
 	private PersonneEntity personne;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    /*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "r_facture_article", joinColumns = {
             @JoinColumn(name = "codefacture", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "codeArticle",
                     nullable = false, updatable = false)})
-    private List<ArticleEntity> articles;
+    private List<ArticleEntity> articles;*/
 
+
+    @OneToMany(mappedBy = "facture")
+    private List<ArticleFactureEntity> article;
 
 }

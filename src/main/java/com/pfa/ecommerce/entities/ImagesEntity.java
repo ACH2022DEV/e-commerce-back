@@ -16,8 +16,8 @@ public class ImagesEntity  implements Serializable {
 
 
     @Id()
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String type;
     @Column(length = 5000000)

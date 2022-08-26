@@ -1,5 +1,6 @@
 package com.pfa.ecommerce.controller;
 
+import com.pfa.ecommerce.entities.dto.CreateFacture;
 import com.pfa.ecommerce.model.Facture;
 import com.pfa.ecommerce.services.intf.IFactureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,8 @@ public class FactureController {
     }
 
     @PostMapping
-    public Facture save(@RequestBody Facture facture) {
+    public Facture save(@RequestBody CreateFacture facture) {
+
         return factureService.save(facture);
     }
 

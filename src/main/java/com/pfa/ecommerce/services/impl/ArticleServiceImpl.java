@@ -45,9 +45,9 @@ public class ArticleServiceImpl  implements IArticleService {
 
 
 
-    public boolean delete(Long codeArticle) {
-        Optional<ArticleEntity> ar =repository.findById(codeArticle); if(ar.isPresent()) {
-        repository.deleteById(codeArticle);
+    public boolean delete(Long id) {
+        Optional<ArticleEntity> ar =repository.findById(id); if(ar.isPresent()) {
+        repository.deleteById(id);
         }
     return true;
     }

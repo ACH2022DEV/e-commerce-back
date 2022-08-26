@@ -1,10 +1,11 @@
 package com.pfa.ecommerce.model;
 
 import com.pfa.ecommerce.entities.ArticleEntity;
+import com.pfa.ecommerce.entities.DevisArticleEntity;
 import com.pfa.ecommerce.entities.PersonneEntity;
 import lombok.*;
 
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -14,9 +15,6 @@ import java.util.List;
 @ToString
 public class Devis {
     private Long codedevis;
-    private Integer codeArticle;
-
-    private Integer quantite;
     private Personne personne;
-    private List<Article> articles;
+    private List<DevisArticle> articles;
 }

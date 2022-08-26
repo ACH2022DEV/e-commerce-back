@@ -11,5 +11,5 @@ public interface IArticleService {
     public Optional<Article> findById(Long id);
     public Article save(Article article);
     public Article update(Article article);
-    public boolean delete(Long codeArticle);
+    public boolean delete(Long id);
 }

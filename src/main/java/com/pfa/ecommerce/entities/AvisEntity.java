@@ -3,6 +3,7 @@ package com.pfa.ecommerce.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="avis")
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class AvisEntity {
+public class AvisEntity implements Serializable {
 
     @Id()
     @GeneratedValue(strategy= GenerationType.IDENTITY)

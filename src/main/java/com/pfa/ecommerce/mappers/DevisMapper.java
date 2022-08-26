@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+@Mapper(uses = DevisArticleMapper.class)
 public interface DevisMapper {
     DevisMapper INSTANCE = Mappers.getMapper(DevisMapper.class);
 

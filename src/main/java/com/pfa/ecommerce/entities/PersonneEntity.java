@@ -65,4 +65,7 @@ public class PersonneEntity implements Serializable {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private RoleEntity role;
+
+    @OneToMany(mappedBy = "personne")
+    private List<PanierEntity> panier;
 }

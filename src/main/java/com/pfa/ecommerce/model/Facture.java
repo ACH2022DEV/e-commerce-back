@@ -1,5 +1,6 @@
 package com.pfa.ecommerce.model;
 
+import com.pfa.ecommerce.entities.ArticleFactureEntity;
 import lombok.*;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public class Facture {
     private Long code;
     private Integer montantTotal;
     private Personne personne;
-    private List<Article> articles;
+    private List<ArticleFacture> article;
 }
