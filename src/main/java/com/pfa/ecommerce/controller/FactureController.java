@@ -2,6 +2,7 @@ package com.pfa.ecommerce.controller;
 
 import com.pfa.ecommerce.entities.dto.CreateFacture;
 import com.pfa.ecommerce.model.Facture;
+import com.pfa.ecommerce.repository.ArticleFactureRepository;
 import com.pfa.ecommerce.services.intf.IFactureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,8 @@ public class FactureController {
 
     @Autowired
     IFactureService factureService;
+    @Autowired
+    ArticleFactureRepository articleFactureRepository;
 
     @GetMapping
     public List<Facture> list() {
@@ -36,6 +39,7 @@ public class FactureController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
+        articleFactureRepository.findbyFactureId(id).forEach(articleFactureRepository::delete);
         factureService.delete(id);
     }
 

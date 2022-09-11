@@ -26,9 +26,6 @@ import lombok.ToString;
 @ToString
 public class PersonneEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -67,5 +64,13 @@ public class PersonneEntity implements Serializable {
     private RoleEntity role;
 
     @OneToMany(mappedBy = "personne")
-    private List<PanierEntity> panier;
+    private List<PanierEntity> paniers;
+    //Nouveau Modification (images pour l'utilisateur)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "image_Personne", joinColumns = {
+            @JoinColumn(name = "idPersonne", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "image_id",
+                    nullable = false, updatable = false)})
+    private List<ImagesEntity> images;
+
 }

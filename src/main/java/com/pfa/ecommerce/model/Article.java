@@ -1,5 +1,6 @@
 package com.pfa.ecommerce.model;
 
+import com.pfa.ecommerce.entities.AvisEntity;
 import com.pfa.ecommerce.entities.PanierEntity;
 import lombok.*;
 
@@ -19,11 +20,12 @@ public class Article {
     private Integer tva;
     private Integer remise;
     private Integer quantite;
-    private List<Images> images;
+    private List<Image> images;
+    private List<Avis> avis;
     //la nouvelle modification
-    private List<DevisArticle> devis;
+    /*private List<DevisArticle> devis;
     private List<ArticleFacture> facture;
-    private List<Panier> panier;
+    private List<Panier> panier;*/
 
 
 }

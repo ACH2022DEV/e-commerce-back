@@ -1,11 +1,12 @@
 package com.pfa.ecommerce.controller;
 
-import com.pfa.ecommerce.entities.dto.CreateFacture;
-import com.pfa.ecommerce.entities.dto.CreatePanier;
-import com.pfa.ecommerce.model.Facture;
+
+import com.pfa.ecommerce.entities.dto.CreateUpdatePanierDto;
+import com.pfa.ecommerce.model.Article;
 import com.pfa.ecommerce.model.Panier;
-import com.pfa.ecommerce.services.intf.IFactureService;
+import com.pfa.ecommerce.repository.PanierRepository;
 import com.pfa.ecommerce.services.intf.IPanierService;
+import com.pfa.ecommerce.services.intf.IPersonneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,28 +19,31 @@ import java.util.Optional;
 public class PanierController {
     @Autowired
     IPanierService iPanierService;
+    @Autowired
+    IPersonneService iPersonneService;
+    @Autowired
+    PanierRepository panierRepository;
 
     @GetMapping
     public List<Panier> list() {
         return iPanierService.getAll();
     }
+
     @GetMapping("/{id}")
-    public Optional<Panier> getFacture(@PathVariable Long id) {
+    public Optional<Panier> getPanier(@PathVariable Long id) {
         return iPanierService.findById(id);
     }
 
     @PostMapping
-    public void save(@RequestBody CreatePanier createPanier) {
+    public void save(@RequestBody CreateUpdatePanierDto panier) {
 
-         iPanierService.save(createPanier);
+        iPanierService.save(panier);
     }
 
-    @PutMapping
-    public Panier update(@RequestBody Panier panier) {
-        return iPanierService.update(panier);
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        panierRepository.findbyPersonneId(id).forEach(panierRepository::delete);
+        iPanierService.delete(id);
     }
-  @DeleteMapping("/{id}")
-  public void delete(@PathVariable Long id) {
-      iPanierService.delete(id);
-  }
 }

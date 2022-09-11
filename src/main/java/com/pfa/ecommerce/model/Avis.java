@@ -2,6 +2,8 @@ package com.pfa.ecommerce.model;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -12,4 +14,6 @@ public class Avis {
     private String message;
     private Integer etoile;
     private Personne personne;
+    private Article article;
+    private LocalDateTime dateAvis;
 }

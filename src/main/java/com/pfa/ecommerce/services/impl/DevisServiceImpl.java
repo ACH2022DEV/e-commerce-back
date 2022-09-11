@@ -1,8 +1,8 @@
 package com.pfa.ecommerce.services.impl;
 
-import com.pfa.ecommerce.entities.dto.CreateDevis;
 import com.pfa.ecommerce.entities.DevisArticleEntity;
 import com.pfa.ecommerce.entities.DevisEntity;
+import com.pfa.ecommerce.entities.dto.CreateDevis;
 import com.pfa.ecommerce.mappers.DevisArticleMapper;
 import com.pfa.ecommerce.mappers.DevisMapper;
 import com.pfa.ecommerce.model.Devis;
@@ -54,27 +54,34 @@ public class DevisServiceImpl implements IDevisService {
 
         // 1 2 4
 
+        // lors de la réception d'une demande de modification d'un devis nous avons 3 cas :
+        //-ajouter un nouveau article
+        //-modifier l'article existant
+        //-supprimer l'article
 
 
         // nous devons pas modifier les informations de la personnes
+
+        // récupérer l'ensemble des codes articles dans le devis à partir de la bdd
         List<Long> codeArtciles = devisArticleRepository.findAll().stream()
-                .filter(e-> e.getDevis().getCodedevis().equals(devis.getCodedevis()))
+                .filter(e -> e.getDevis().getCodedevis().equals(devis.getCodedevis()))
                 .map(e -> e.getArticle().getCodeArticle())
                 .collect(Collectors.toList());
 
-
+        // cette partie va gérer les deux cas (modification et ajout)
         devis.getArticles().forEach(art -> {
             DevisArticleEntity articleToUpdate = DevisArticleMapper.INSTANCE.mapToEntity(art);
             devisRepository.findById(devis.getCodedevis()).ifPresent(articleToUpdate::setDevis);
             devisArticleRepository.save(articleToUpdate);
         });
-        List<Long> newCodes = devis.getArticles().stream().map(e ->e.getArticle().getCodeArticle()).collect(Collectors.toList());
 
-        codeArtciles.stream().filter(e -> !newCodes.contains(e)).forEach(e -> {
-            /*devisArticleRepository.findById(e, devis.getCodedevis()).ifPresent(eToDelete ->{
+        // la suppression
+        List<Long> codesRecus = devis.getArticles().stream().map(e -> e.getArticle().getCodeArticle()).collect(Collectors.toList());
+
+        codeArtciles.stream().filter(e -> !codesRecus.contains(e)).forEach(e -> {
+            devisArticleRepository.findbyArticleIdandDevisId(devis.getCodedevis(), e).ifPresent(eToDelete -> {
                 devisArticleRepository.delete(eToDelete);
-                System.out.println("tot");
-            });*/
+            });
         });
 
         // il faut gérer le cas de a suppression
@@ -82,10 +89,11 @@ public class DevisServiceImpl implements IDevisService {
     }
 
 
-    public boolean delete(Long CodeDevis) {
-        Optional<DevisEntity> ar = devisRepository.findById(CodeDevis);
+    public boolean delete(Long id) {
+
+        Optional<DevisEntity> ar = devisRepository.findById(id);
         if (ar.isPresent()) {
-            devisRepository.deleteById(CodeDevis);
+            devisRepository.deleteById(id);
         }
         return true;
     }
@@ -95,6 +103,7 @@ public class DevisServiceImpl implements IDevisService {
         DevisEntity newDevis = new DevisEntity();
         personneRepository.findById(devis.getIdPersonne()).ifPresent(newDevis::setPersonne);
         DevisEntity savedDevis = devisRepository.save(newDevis);
+
 
         devis.getArticles().forEach(art -> {
             DevisArticleEntity devisArticleEntity = new DevisArticleEntity();

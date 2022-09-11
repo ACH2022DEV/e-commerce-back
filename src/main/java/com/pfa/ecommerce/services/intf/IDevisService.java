@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface IDevisService {
     public Devis update( Devis devis);
-    public boolean delete(Long CodeDevis);
+    public boolean delete(Long id);
     public Devis save(CreateDevis devis);
     public Optional<Devis> findById(Long id);
     public List<Devis> getAll();

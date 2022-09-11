@@ -1,7 +1,7 @@
 package com.pfa.ecommerce.services.intf;
 
 
-import com.pfa.ecommerce.model.Images;
+import com.pfa.ecommerce.model.Image;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -10,10 +10,11 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface IimagesService {
-    public Images UploadImage(MultipartFile [] file)throws IOException;
-    public Set<Images> Uplod(MultipartFile [] multipartFiles) throws IOException;
-    public Optional<Images> getImage(long id);
+    public Set<Image> uploadImage(MultipartFile[] files) throws IOException;
 
-    public List<Images> getALLimages();
+
+    public Optional<Image> getImage(long id);
+
+    public List<Image> getALLimages();
 
 }

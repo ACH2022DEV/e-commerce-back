@@ -1,6 +1,6 @@
 package com.pfa.ecommerce.entities.dto;
 
-
+import com.pfa.ecommerce.model.Avis;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreatePanier {
+public class CreateAvisDto {
     private Long idPersonne;
-    private List<PanierDto> panierArticle;
-
+    private List<AvisDto> avis;
 }

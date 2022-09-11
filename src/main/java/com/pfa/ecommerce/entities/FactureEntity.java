@@ -28,9 +28,8 @@ public class FactureEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long code;
 
-    @Column(nullable = false)
-    private Integer montantTotal;
-
+    //@Column()// j'ai annuler 'nullable = false'
+    //private Integer montantTotal;
 
 
 
@@ -48,6 +47,6 @@ public class FactureEntity implements Serializable {
 
 
     @OneToMany(mappedBy = "facture")
-    private List<ArticleFactureEntity> article;
+    private List<ArticleFactureEntity> articles;
 
 }

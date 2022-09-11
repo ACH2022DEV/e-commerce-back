@@ -1,9 +1,11 @@
 package com.pfa.ecommerce.entities;
 
+import com.pfa.ecommerce.model.Article;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="avis")
@@ -24,9 +26,14 @@ public class AvisEntity implements Serializable {
     @Column(nullable=false)
     private Integer etoile;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personne_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "Avis_PersonneId")
     private PersonneEntity personne;
+    @ManyToOne
+    @JoinColumn(name = "Avis_ArticleId")
+    private ArticleEntity article;
+    private LocalDateTime dateAvis;
+
 
 
 }

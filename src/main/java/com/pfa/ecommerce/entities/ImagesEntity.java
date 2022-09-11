@@ -12,12 +12,13 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ImagesEntity  implements Serializable {
+public class ImagesEntity implements Serializable {
 
 
     @Id()
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String name;
     private String type;
     @Column(length = 5000000)

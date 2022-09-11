@@ -13,6 +13,7 @@ public interface DevisArticleMapper {
     DevisArticleMapper INSTANCE = Mappers.getMapper(DevisArticleMapper.class);
     @Mapping(source="devis", target = "devis", ignore = true)
     DevisArticle mapToModel(DevisArticleEntity devis);
+
     @Mapping(source="devis", target = "devis", ignore = true)
     DevisArticleEntity mapToEntity(DevisArticle devis);
 

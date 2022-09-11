@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Panier")
@@ -14,19 +14,23 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class PanierEntity implements Serializable {
-   @Id()
+    @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "personneId")
     private PersonneEntity personne;
+
     @ManyToOne
     @JoinColumn(name = "articleId")
     private ArticleEntity article;
+
+
     private int quantity;
-    @Temporal(TemporalType.DATE)
-    private Date date;
+
+
+    private LocalDateTime date;
 
 
 }

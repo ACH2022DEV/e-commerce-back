@@ -5,19 +5,22 @@ import com.pfa.ecommerce.entities.PersonneEntity;
 import com.pfa.ecommerce.model.Devis;
 import com.pfa.ecommerce.model.Personne;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(uses = DevisArticleMapper.class)
+@Mapper(uses = {DevisArticleMapper.class, PersonneMapper.class})
 public interface DevisMapper {
     DevisMapper INSTANCE = Mappers.getMapper(DevisMapper.class);
 
+    @Mapping(target = "personne.paniers", source = "personne.paniers", ignore = true)
     Devis mapToModel(DevisEntity devis);
 
     DevisEntity mapToEntity(Devis devis);
 
     List<DevisEntity> mapToEntities(List<Devis> devisList);
+    @Mapping(source="personne", target = "personne", ignore = true)//par moi
 
     List<Devis> mapToModels(List<DevisEntity> devisList);
 }

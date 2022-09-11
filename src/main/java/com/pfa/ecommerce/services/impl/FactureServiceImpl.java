@@ -3,6 +3,7 @@ package com.pfa.ecommerce.services.impl;
 import com.pfa.ecommerce.entities.dto.CreateFacture;
 import com.pfa.ecommerce.entities.ArticleFactureEntity;
 import com.pfa.ecommerce.entities.FactureEntity;
+import com.pfa.ecommerce.mappers.ArticleFactureMapper;
 import com.pfa.ecommerce.mappers.FactureMapper;
 import com.pfa.ecommerce.model.Facture;
 import com.pfa.ecommerce.repository.ArticleFactureRepository;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -43,10 +45,36 @@ public class FactureServiceImpl implements IFactureService {
         return FactureMapper.INSTANCE.mapToModel(factureRepository.save(FactureMapper.INSTANCE.mapToEntity(facture)));
     }*/
     public Facture update(Facture facture) {
-        return FactureMapper.INSTANCE.mapToModel(factureRepository.save(FactureMapper.INSTANCE.mapToEntity(facture)));
+
+
+        List<Long> codeArtciles = articleFactureRepository.findAll().stream()
+                .filter(e -> e.getFacture().getCode().equals(facture.getCode()))
+                .map(e -> e.getArticle().getCodeArticle())
+                .collect(Collectors.toList());
+
+
+        facture.getArticles().forEach(art -> {
+            ArticleFactureEntity articleToUpdate = ArticleFactureMapper.INSTANCE.mapToEntity(art);
+            factureRepository.findById(facture.getCode()).ifPresent(articleToUpdate::setFacture);
+            articleFactureRepository.save(articleToUpdate);
+        });
+
+
+        List<Long> codesRecus = facture.getArticles().stream().map(e -> e.getArticle().getCodeArticle()).collect(Collectors.toList());
+
+        codeArtciles.stream().filter(e -> !codesRecus.contains(e)).forEach(e -> {
+            articleFactureRepository.findbyArticleIdandFactureId(facture.getCode(), e).ifPresent(eToDelete -> {
+                articleFactureRepository.delete(eToDelete);
+            });
+        });
+
+
+        return factureRepository.findById(facture.getCode()).map(FactureMapper.INSTANCE::mapToModel).orElse(null);
     }
 
-    public Boolean delete(Long code) {
+
+
+    public boolean delete(Long code) {
         Optional<FactureEntity> fact = factureRepository.findById(code);
         if (fact.isPresent()) {
             factureRepository.deleteById(code);

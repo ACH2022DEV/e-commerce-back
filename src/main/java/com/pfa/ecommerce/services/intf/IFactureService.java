@@ -11,6 +11,6 @@ public interface IFactureService  {
     public Optional<Facture> findById(Long id);
     public Facture save(CreateFacture facture);
     public Facture update(Facture facture);
-    public Boolean delete(Long code);
+    public boolean delete(Long code);
 
 }

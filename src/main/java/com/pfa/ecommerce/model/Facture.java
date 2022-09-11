@@ -14,7 +14,7 @@ public class Facture {
     private static final long serialVersionUID = 1L;
 
     private Long code;
-    private Integer montantTotal;
+   // private Integer montantTotal;
     private Personne personne;
-    private List<ArticleFacture> article;
+    private List<ArticleFacture> articles;
 }
