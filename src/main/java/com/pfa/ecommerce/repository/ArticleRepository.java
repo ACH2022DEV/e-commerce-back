@@ -21,7 +21,10 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> , 
     //Optional<ArticleEntity> findByCodeArticle(Long codeArticle);
 
 
-    @Query("select art from ArticleEntity art where art.description= :keyword")
+    @Query("select art from ArticleEntity art where "+ "CONCAT( art.description,art.codeArticle,art.paysOrigine,art.prix,art.tva,art.remise,art.quantite) "+"LIKE CONCAT( '%',:keyword,'%')")
+
+
+
     public Page<ArticleEntity> findBySearch(Pageable pageable,String keyword);
 
   /*  @Query(value = "select i from ArticleEntity i  where  i.images.id in (articleId)")

@@ -29,6 +29,17 @@ public class PersonneServiceImpl implements IPersonneService {
     public Personne save(Personne personne) {
         return PersonneMapper.INSTANCE.mapToModel(personneRepository.save(PersonneMapper.INSTANCE.mapToEntity(personne)));
     }
+    @Override
+    public Page<Personne> getSearch(Pageable pageable,String keyword) {
+
+        Page<PersonneEntity> personneEntityPage = personneRepository.findBySearch(pageable,keyword);
+        List<PersonneEntity> personneEntityList = personneEntityPage.stream().toList();
+        List<Personne> personneListList =
+                PersonneMapper.INSTANCE.mapToModels(personneEntityList.stream().toList());
+
+
+        return new PageImpl<>(personneListList, pageable, personneEntityPage.getTotalElements());
+    }
 
     @Override
     public Page<Personne> getAll(Pageable pageable) {

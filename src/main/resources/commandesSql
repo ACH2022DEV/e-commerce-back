@@ -1,0 +1,26 @@
+select * from facture where personne_id = 117;
+
+select * from r_facture_article where facture_id = 160 ;
+
+delete from r_devis_article where codedevis is  null;
+delete from r_devis_article where code_article is  null;
+select * from r_devis_article where code_article is null;
+select * from article;
+
+INSERT INTO public.image_article(code_article, image_id)	VALUES (35, 25);
+INSERT INTO public.image_article(code_article, image_id)	VALUES (35, 26);
+INSERT INTO public.image_personne(id_personne ,image_id)VALUES (119, 243);
+select * from image_personne where id_personne = 119 ;
+
+delete from image_personne where image_id = 312 ;
+
+select * from image_article;
+delete from panier;
+select * from panier;
+delete from r_facture_article;
+select * from r_facture_article;
+delete from r_devis_article;
+select * from r_devis_article;
+delete from devis;
+select * from devis;
+

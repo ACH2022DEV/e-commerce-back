@@ -39,7 +39,15 @@ public class PersonneController {
 	DevisRepository devisRepository;
 	@Autowired
 	IimagesService iimagesService;
-
+	@GetMapping("/search")
+	public ResponseEntity<Page<Personne>> listBysearch(@ParameterObject Pageable pageable,@RequestParam String search) {
+		Page<Personne> personnePage = personneService.getSearch(pageable,search);
+		if (personnePage.hasContent()){
+			return ResponseEntity.ok(personnePage);
+		} else {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}
+	}
 
 	@GetMapping
 	public ResponseEntity<Page<Personne>> list(@ParameterObject Pageable pageable) {
