@@ -6,6 +6,7 @@ import com.pfa.ecommerce.entities.PersonneEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -17,4 +18,5 @@ public class Devis {
     private Long codedevis;
     private Personne personne;
     private List<DevisArticle> articles;
+
 }

@@ -4,6 +4,7 @@ import com.pfa.ecommerce.model.Personne;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -30,6 +31,7 @@ public class DevisEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personne_id", nullable = false)
     private PersonneEntity personne;
+
 
 
     @OneToMany(mappedBy = "devis")

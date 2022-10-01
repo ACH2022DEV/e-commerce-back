@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="r_facture_article")
@@ -20,8 +21,10 @@ public class ArticleFactureEntity implements Serializable {
     Long id;
 
     @ManyToOne
-    @JoinColumn(name = "FactureId")
+    @JoinColumn(name = "facture_id")
     private FactureEntity facture;
+    private LocalDateTime dateEdition;
+
 
     @ManyToOne
     @JoinColumn(name = "codeArticle")

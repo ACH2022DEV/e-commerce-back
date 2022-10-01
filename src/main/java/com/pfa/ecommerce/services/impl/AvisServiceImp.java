@@ -44,16 +44,19 @@ public class AvisServiceImp implements IAvisService {
             });*/
 
         avis.getAvis().forEach(avi -> {
+
             AvisEntity avisEntityToSave = new AvisEntity();
-            avisEntityToSave.setEtoile(avi.getEtoile());
-            avisEntityToSave.setMessage(avi.getMessage());
-            avisEntityToSave.setDateAvis(LocalDateTime.now());
+            if (avis.getAvis() != null) {
+                avisEntityToSave.setEtoile(avi.getEtoile());
+                avisEntityToSave.setMessage(avi.getMessage());
+                avisEntityToSave.setDateAvis(LocalDateTime.now());
+
             articleRepository.findById(avi.getCodeArticle())
                     .map(monavis -> {
                         avisEntityToSave.setArticle(monavis);
                         return avisEntityToSave;
                     });
-
+            }
             // il faut que la personne soit présente
             personneRepository.findById(avis.getIdPersonne()).map(per -> {
                 avisEntityToSave.setPersonne(per);

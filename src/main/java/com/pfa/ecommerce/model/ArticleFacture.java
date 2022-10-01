@@ -5,19 +5,18 @@ import com.pfa.ecommerce.entities.FactureEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
 public class ArticleFacture {
-    //@Id
-   // @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
-    //    private FactureEntity facture;
     private Facture facture;
-    // private ArticleEntity article;
     private Article article;
+    private LocalDateTime dateEdition;
     private Long quatite;
     private Float remise;
 }

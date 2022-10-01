@@ -1,5 +1,6 @@
 package com.pfa.ecommerce.services.intf;
 
+import com.pfa.ecommerce.entities.dto.AjoutPanierDto;
 import com.pfa.ecommerce.entities.dto.CreateUpdatePanierDto;
 import com.pfa.ecommerce.model.Article;
 import com.pfa.ecommerce.model.Panier;
@@ -16,4 +17,6 @@ public interface IPanierService {
 
     //public Panier update(Panier panier);
     public boolean delete(Long id);
+    public void  ajout(AjoutPanierDto panier);
+    //public boolean delete( long codeArticle);
 }

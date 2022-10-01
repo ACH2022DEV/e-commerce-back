@@ -2,8 +2,11 @@ package com.pfa.ecommerce.services.impl;
 
 import com.pfa.ecommerce.entities.ArticleEntity;
 import com.pfa.ecommerce.entities.PanierEntity;
+import com.pfa.ecommerce.entities.PersonneEntity;
+import com.pfa.ecommerce.entities.dto.AjoutPanierDto;
 import com.pfa.ecommerce.entities.dto.CreateUpdatePanierDto;
 import com.pfa.ecommerce.mappers.PanierMapper;
+import com.pfa.ecommerce.mappers.PersonneMapper;
 import com.pfa.ecommerce.model.Article;
 import com.pfa.ecommerce.model.Panier;
 import com.pfa.ecommerce.repository.ArticleRepository;
@@ -72,8 +75,63 @@ public class PanierServiceImp implements IPanierService {
         });
     }
 
+      /*   @Override
+        public void  ajout(AjoutPanierDto panier){
+
+            List<PanierEntity> pa=panierRepository.findbyArticleId(panier.getPaniers().getCodeArticle());
+             Optional<ArticleEntity> article1 = articleRepository.findById(panier.getPaniers().getCodeArticle());
+
+           //  if (pa.isEmpty()){
+                        PanierEntity panierEntityToSave = new PanierEntity();
+
+                        if (panier.getPaniers() != null) {
+                            if (panier.equals(panier.getPaniers().getCodeArticle())){
+                            panierEntityToSave.setQuantity(panier.getPaniers().getQuantity());
+                            panierEntityToSave.setDate(LocalDateTime.now());
+                        }
+                        Optional<PersonneEntity> personne = personneRepository.findById(panier.getIdPersonne());
+                        panierEntityToSave.setPersonne(personne.get());
+                        if (panier.getPaniers() != null) {
+                            Optional<ArticleEntity> article = articleRepository.findById(panier.getPaniers().getCodeArticle());
+                            panierEntityToSave.setArticle(article.get());
+                            panierRepository.save(panierEntityToSave);}else {
+                            int quantite=1;
+                            panierEntityToSave.setQuantity(panierEntityToSave.getQuantity()+quantite);
+                        }
+                       }
+                        }
+*/
+//code
+      @Override
+public void  ajout(AjoutPanierDto panier){
+
+    List<PanierEntity> pa=panierRepository.findbyArticleId(panier.getPaniers().getCodeArticle());
+    Optional<ArticleEntity> article1 = articleRepository.findById(panier.getPaniers().getCodeArticle());
+      if (pa.isEmpty()){
+    PanierEntity panierEntityToSave = new PanierEntity();
+    if (panier.getPaniers() != null) {
+        panierEntityToSave.setQuantity(panier.getPaniers().getQuantity());
+        panierEntityToSave.setDate(LocalDateTime.now());
+    }
+        Optional<PersonneEntity> personne = personneRepository.findById(panier.getIdPersonne());
+        panierEntityToSave.setPersonne(personne.get());
+       if (panier.getPaniers() != null) {
+            Optional<ArticleEntity> article = articleRepository.findById(panier.getPaniers().getCodeArticle());
+            panierEntityToSave.setArticle(article.get());
+            panierRepository.save(panierEntityToSave);
+    }else   {
+
+        }
+          }
+      }
 
 
+
+
+
+
+
+    //la première code//
     public boolean delete(Long id) {
         Optional<PanierEntity> a = panierRepository.findById(id);
         if (a.isPresent()) {
@@ -82,4 +140,13 @@ public class PanierServiceImp implements IPanierService {
         }
         return false;
     }
+   /* public boolean delete(long codeArticle){
+        Optional<ArticleEntity> article=articleRepository.findById(codeArticle);
+        if (article.isPresent()) {
+            panierRepository.findbyArticleId(article.get().getCodeArticle());
+            return true;
+        }
+        return false;
+    }*/
+
 }

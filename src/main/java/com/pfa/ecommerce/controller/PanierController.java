@@ -1,6 +1,8 @@
 package com.pfa.ecommerce.controller;
 
 
+import com.pfa.ecommerce.entities.PanierEntity;
+import com.pfa.ecommerce.entities.dto.AjoutPanierDto;
 import com.pfa.ecommerce.entities.dto.CreateUpdatePanierDto;
 import com.pfa.ecommerce.model.Article;
 import com.pfa.ecommerce.model.Panier;
@@ -40,10 +42,19 @@ public class PanierController {
         iPanierService.save(panier);
     }
 
+    @PutMapping
+    public void ajout(@RequestBody AjoutPanierDto panier) {
+// rajouter la fonctionalité ajout d'un panier
+
+            iPanierService.ajout(panier);
+        }
+
+
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         panierRepository.findbyPersonneId(id).forEach(panierRepository::delete);
         iPanierService.delete(id);
     }
+
 }

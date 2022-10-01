@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name="r_devis_article")
+@Table(name = "r_devis_article")
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,16 +19,18 @@ import java.io.Serializable;
 public class DevisArticleEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "codedevis")
+    @ManyToOne()
+    @JoinColumn(name = "codedevis", nullable = false)
     private DevisEntity devis;
 
     @ManyToOne
-    @JoinColumn(name = "codeArticle")
+    @JoinColumn(name = "codeArticle", nullable = false)
     private ArticleEntity article;
+    private LocalDateTime dateEdition;
+
 
     private Long quatite;
 

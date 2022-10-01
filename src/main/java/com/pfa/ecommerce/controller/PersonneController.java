@@ -1,13 +1,18 @@
 package com.pfa.ecommerce.controller;
 
+import com.pfa.ecommerce.model.Facture;
 import com.pfa.ecommerce.model.Image;
 import com.pfa.ecommerce.model.Personne;
 import com.pfa.ecommerce.repository.*;
 import com.pfa.ecommerce.services.intf.IPersonneService;
 import com.pfa.ecommerce.services.intf.IimagesService;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,9 +41,14 @@ public class PersonneController {
 	IimagesService iimagesService;
 
 
-	@GetMapping()
-	public List<Personne> list(@RequestParam(defaultValue = "0") int pageNo) {
-		return personneService.findAll(pageNo);
+	@GetMapping
+	public ResponseEntity<Page<Personne>> list(@ParameterObject Pageable pageable) {
+		Page<Personne> personnePage = personneService.getAll(pageable);
+		if (personnePage.hasContent()){
+			return ResponseEntity.ok(personnePage);
+		} else {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}
 	}
 
 	@GetMapping("/{id}")
@@ -53,16 +63,6 @@ public class PersonneController {
 		Set<Image> imgs = iimagesService.uploadImage(files);
 		personne.setImages(new ArrayList<>(imgs));
 		return personneService.save(personne);
-	}
-
-	@DeleteMapping("/{id}")
-	public void delete(@PathVariable Long id) {
-		//Nouveau ligne
-
-		/*panierRepository.findbyPersonneId(id).forEach(panierRepository::delete);
-		devisRepository.findbyPersonneId(id).forEach(devisRepository::delete);*/
-
-		 personneService.delete(id);
 	}
 
 	@PutMapping

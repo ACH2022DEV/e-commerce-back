@@ -73,4 +73,5 @@ public class PersonneEntity implements Serializable {
                     nullable = false, updatable = false)})
     private List<ImagesEntity> images;
 
+    private Boolean actif;
 }

@@ -4,7 +4,12 @@ import com.pfa.ecommerce.entities.dto.CreateFacture;
 import com.pfa.ecommerce.model.Facture;
 import com.pfa.ecommerce.repository.ArticleFactureRepository;
 import com.pfa.ecommerce.services.intf.IFactureService;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,9 +27,15 @@ public class FactureController {
     ArticleFactureRepository articleFactureRepository;
 
     @GetMapping
-    public List<Facture> list() {
-        return factureService.getAll();
+    public ResponseEntity<Page<Facture>> list(@ParameterObject Pageable pageable) {
+        Page<Facture> facturePage = factureService.getAll(pageable);
+        if (facturePage.hasContent()){
+            return ResponseEntity.ok(facturePage);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
     }
+
 
     @GetMapping("/{id}")
     public Optional<Facture> getFacture(@PathVariable Long id) {

@@ -2,17 +2,17 @@ package com.pfa.ecommerce.services.impl;
 
 import com.pfa.ecommerce.entities.ArticleEntity;
 import com.pfa.ecommerce.mappers.ArticleMapper;
-import com.pfa.ecommerce.mappers.PersonneMapper;
+import com.pfa.ecommerce.mappers.PanierMapper;
 import com.pfa.ecommerce.model.Article;
-import com.pfa.ecommerce.model.Personne;
 import com.pfa.ecommerce.repository.ArticleRepository;
 import com.pfa.ecommerce.services.intf.IArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Id;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,9 +23,34 @@ public class ArticleServiceImpl  implements IArticleService {
 
     @Autowired
     ArticleRepository repository;
+
+
     @Override
-    public List<Article> getAll() {
-        return ArticleMapper.INSTANCE.mapToModels(repository.findAll());
+    public Page<Article> getSearch(Pageable pageable,String keyword) {
+        Page<ArticleEntity> articleEntityPage = repository.findBySearch(pageable,keyword);
+        List<ArticleEntity> articleEntityList = articleEntityPage.stream().toList();
+        List<Article> articleListList =
+                ArticleMapper.INSTANCE.mapToModels(articleEntityList.stream().toList());
+
+
+        return new PageImpl<>(articleListList, pageable, articleEntityPage.getTotalElements());
+    }
+    //fin Methode
+
+
+
+
+
+    @Override
+    public Page<Article> getAll(Pageable pageable) {
+
+        Page<ArticleEntity> articleEntityPage = repository.findAll(pageable);
+        List<ArticleEntity> articleEntityList = articleEntityPage.stream().toList();
+        List<Article> articleListList =
+                ArticleMapper.INSTANCE.mapToModels(articleEntityList.stream().toList());
+
+
+        return new PageImpl<>(articleListList, pageable, articleEntityPage.getTotalElements());
     }
 
     public Optional<Article> findById(Long id) {

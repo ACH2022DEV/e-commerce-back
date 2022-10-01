@@ -1,6 +1,8 @@
 package com.pfa.ecommerce.entities;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +16,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+//@Embeddable
 public class ArticleEntity implements Serializable {
 
 
@@ -45,6 +48,7 @@ public class ArticleEntity implements Serializable {
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   //@OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(name = "image_article", joinColumns = {
             @JoinColumn(name = "codeArticle", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "image_id",

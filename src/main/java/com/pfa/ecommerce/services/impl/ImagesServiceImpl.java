@@ -31,7 +31,8 @@ public class ImagesServiceImpl implements IimagesService {
 
     }
 
-    private Set<Image> uplod(MultipartFile[] multipartFiles) throws IOException {
+
+    public Set<Image> uplod(MultipartFile[] multipartFiles) throws IOException {
 
         Set<Image> images = new HashSet<>();
         for (MultipartFile file : multipartFiles) {
@@ -50,5 +51,13 @@ public class ImagesServiceImpl implements IimagesService {
     public List<Image> getALLimages() {
         return ImagesMapper.INSTANCE.mapToModels(imagesRepository.findAll());
     }
+    public boolean delete(Long id) {
+        Optional<ImagesEntity> ar =imagesRepository.findById(id); if(ar.isPresent()) {
+            imagesRepository.deleteById(id);
+        }
+        return true;
+    }
+
+
 
 }

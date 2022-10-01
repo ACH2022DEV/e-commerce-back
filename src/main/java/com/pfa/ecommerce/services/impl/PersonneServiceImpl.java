@@ -1,8 +1,11 @@
 package com.pfa.ecommerce.services.impl;
 
+import com.pfa.ecommerce.entities.FactureEntity;
 import com.pfa.ecommerce.entities.PersonneEntity;
 import com.pfa.ecommerce.mappers.ArticleMapper;
+import com.pfa.ecommerce.mappers.FactureMapper;
 import com.pfa.ecommerce.mappers.PersonneMapper;
+import com.pfa.ecommerce.model.Facture;
 import com.pfa.ecommerce.model.Personne;
 import com.pfa.ecommerce.repository.PersonneRepository;
 import com.pfa.ecommerce.services.intf.IPersonneService;
@@ -28,17 +31,15 @@ public class PersonneServiceImpl implements IPersonneService {
     }
 
     @Override
-    public List<Personne> findAll(int pageNo ) {
-        Pageable paging = PageRequest.of(pageNo, 6);
-        Page<PersonneEntity> pagedResult = personneRepository.findAll(paging);
-        //int totalElements = (int) pagedResult.getTotalElements();
-        List<PersonneEntity> PpersonneList = pagedResult.getContent();
-       //int[] pages=new int[pagedResult.getTotalPages()];
+    public Page<Personne> getAll(Pageable pageable) {
+
+        Page<PersonneEntity> personneEntityPage = personneRepository.findAll(pageable);
+        List<PersonneEntity> personneEntityList = personneEntityPage.stream().toList();
+        List<Personne> personneListList =
+                PersonneMapper.INSTANCE.mapToModels(personneEntityList.stream().toList());
 
 
-        return PersonneMapper.INSTANCE.mapToModels(PpersonneList);
-
-
+        return new PageImpl<>(personneListList, pageable, personneEntityPage.getTotalElements());
     }
 
     @Override

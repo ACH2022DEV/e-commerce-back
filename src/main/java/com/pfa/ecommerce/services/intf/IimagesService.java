@@ -16,5 +16,7 @@ public interface IimagesService {
     public Optional<Image> getImage(long id);
 
     public List<Image> getALLimages();
+    public boolean delete(Long id);
+    //public Set<Image> uplod(MultipartFile[] multipartFiles) throws IOException;
 
 }

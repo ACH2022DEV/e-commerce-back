@@ -1,15 +1,17 @@
 package com.pfa.ecommerce.repository;
 
+import com.pfa.ecommerce.entities.PanierEntity;
 import com.pfa.ecommerce.entities.PersonneEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
 import java.util.Optional;
 
 
-public interface PersonneRepository extends JpaRepository <PersonneEntity, Long> {
+public interface PersonneRepository extends JpaRepository <PersonneEntity, Long>, JpaSpecificationExecutor<PersonneEntity> {
 
     Optional<PersonneEntity> findByUsername(String username);
 

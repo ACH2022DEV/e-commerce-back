@@ -1,13 +1,10 @@
 package com.pfa.ecommerce.entities;
 
-import com.pfa.ecommerce.model.Devis;
-import com.pfa.ecommerce.model.Personne;
 import lombok.*;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
-
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -25,25 +22,15 @@ public class FactureEntity implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     @Id()
+    @Column(name = "facture_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long code;
-
-    //@Column()// j'ai annuler 'nullable = false'
-    //private Integer montantTotal;
+    private Long id;
 
 
-
+    private Integer montantTotal;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personne_id", nullable = false)
-	private PersonneEntity personne;
-
-
-    /*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "r_facture_article", joinColumns = {
-            @JoinColumn(name = "codefacture", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "codeArticle",
-                    nullable = false, updatable = false)})
-    private List<ArticleEntity> articles;*/
+    private PersonneEntity personne;
 
 
     @OneToMany(mappedBy = "facture")
