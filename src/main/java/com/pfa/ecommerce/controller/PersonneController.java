@@ -6,6 +6,8 @@ import com.pfa.ecommerce.model.Personne;
 import com.pfa.ecommerce.repository.*;
 import com.pfa.ecommerce.services.intf.IPersonneService;
 import com.pfa.ecommerce.services.intf.IimagesService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,7 +42,10 @@ public class PersonneController {
 	@Autowired
 	IimagesService iimagesService;
 	@GetMapping("/search")
-	public ResponseEntity<Page<Personne>> listBysearch(@ParameterObject Pageable pageable,@RequestParam String search) {
+	@Operation(summary = "Récupérer la liste des personnes ")
+	public ResponseEntity<Page<Personne>> listBysearch(
+			@ParameterObject Pageable pageable,
+			@Parameter(description = "le critère de recherche") @RequestParam String search) {
 		Page<Personne> personnePage = personneService.getSearch(pageable,search);
 		if (personnePage.hasContent()){
 			return ResponseEntity.ok(personnePage);
