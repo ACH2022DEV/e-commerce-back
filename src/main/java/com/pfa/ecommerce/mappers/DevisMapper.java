@@ -15,12 +15,14 @@ public interface DevisMapper {
     DevisMapper INSTANCE = Mappers.getMapper(DevisMapper.class);
 
     @Mapping(target = "personne.paniers", source = "personne.paniers", ignore = true)
+    @Mapping(target = "personne.avis", source = "personne.avis", ignore = true)
     Devis mapToModel(DevisEntity devis);
 
     DevisEntity mapToEntity(Devis devis);
 
     List<DevisEntity> mapToEntities(List<Devis> devisList);
     @Mapping(source="personne", target = "personne", ignore = true)//par moi
+    @Mapping(target = "personne.avis", source = "personne.avis", ignore = true)
 
     List<Devis> mapToModels(List<DevisEntity> devisList);
 }

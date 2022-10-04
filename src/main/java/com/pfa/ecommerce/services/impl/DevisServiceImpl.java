@@ -1,13 +1,17 @@
 package com.pfa.ecommerce.services.impl;
 
+import com.pfa.ecommerce.entities.ArticleEntity;
 import com.pfa.ecommerce.entities.DevisArticleEntity;
 import com.pfa.ecommerce.entities.DevisEntity;
 import com.pfa.ecommerce.entities.PersonneEntity;
 import com.pfa.ecommerce.entities.dto.CreateDevis;
+import com.pfa.ecommerce.mappers.ArticleMapper;
 import com.pfa.ecommerce.mappers.DevisArticleMapper;
 import com.pfa.ecommerce.mappers.DevisMapper;
 import com.pfa.ecommerce.mappers.PersonneMapper;
+import com.pfa.ecommerce.model.Article;
 import com.pfa.ecommerce.model.Devis;
+import com.pfa.ecommerce.model.DevisArticle;
 import com.pfa.ecommerce.model.Personne;
 import com.pfa.ecommerce.repository.ArticleRepository;
 import com.pfa.ecommerce.repository.DevisArticleRepository;
@@ -42,6 +46,17 @@ public class DevisServiceImpl implements IDevisService {
 
     @Autowired
     PersonneRepository personneRepository;
+   /* @Override
+    public Page<Devis> getSearch(Pageable pageable, String keyword) {
+        Page<DevisEntity> devisEntityPage = devisRepository.findBySearch(pageable,keyword);
+        List<DevisEntity> devisEntityList = devisEntityPage.stream().toList();
+        List<Devis> devisList =
+                DevisMapper.INSTANCE.mapToModels(devisEntityList.stream().toList());
+
+
+        return new PageImpl<>(devisList, pageable, devisEntityPage.getTotalElements());
+    }
+    //fin Methode*/
 
     @Override
     public Page<Devis> getAll(Pageable pageable) {

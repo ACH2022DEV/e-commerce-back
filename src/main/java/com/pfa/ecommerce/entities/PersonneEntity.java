@@ -8,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.pfa.ecommerce.model.Avis;
 import com.pfa.ecommerce.model.Facture;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -74,4 +75,6 @@ public class PersonneEntity implements Serializable {
     private List<ImagesEntity> images;
 
     private Boolean actif;
+    @OneToMany(mappedBy = "personne")
+    private List<AvisEntity> avis;
 }

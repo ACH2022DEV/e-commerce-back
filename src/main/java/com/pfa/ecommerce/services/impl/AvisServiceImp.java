@@ -1,14 +1,20 @@
 package com.pfa.ecommerce.services.impl;
 
+import com.pfa.ecommerce.entities.ArticleEntity;
 import com.pfa.ecommerce.entities.AvisEntity;
 import com.pfa.ecommerce.entities.dto.CreateAvisDto;
+import com.pfa.ecommerce.mappers.ArticleMapper;
 import com.pfa.ecommerce.mappers.AvisMapper;
+import com.pfa.ecommerce.model.Article;
 import com.pfa.ecommerce.model.Avis;
 import com.pfa.ecommerce.repository.ArticleRepository;
 import com.pfa.ecommerce.repository.AvisRepository;
 import com.pfa.ecommerce.repository.PersonneRepository;
 import com.pfa.ecommerce.services.intf.IAvisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -27,6 +33,18 @@ public class AvisServiceImp implements IAvisService {
     PersonneRepository personneRepository;
     @Autowired
     ArticleRepository articleRepository;
+
+
+    @Override
+    public Page<Avis> getSearch(Pageable pageable, Integer NbEtoile) {
+        Page<AvisEntity> avisEntityPage = avisRepository.findBySearch(pageable,NbEtoile);
+        List<AvisEntity> avisEntityList = avisEntityPage.stream().toList();
+        List<Avis> avisList =
+                AvisMapper.INSTANCE.mapToModels(avisEntityList.stream().toList());
+
+
+        return new PageImpl<>(avisList, pageable, avisEntityPage.getTotalElements());
+    }
     public List<Avis> getAll() {
         return AvisMapper.INSTANCE.mapToModels(avisRepository.findAll());
     }

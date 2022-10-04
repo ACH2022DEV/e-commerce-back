@@ -62,4 +62,5 @@ public class Personne {
     private List<Panier> paniers;
     @Schema (name="images", description = "la liste des images de  personne ")
     private List<Image> images;
+    private List<Avis> avis;
 }

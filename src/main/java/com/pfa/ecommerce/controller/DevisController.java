@@ -1,6 +1,7 @@
 package com.pfa.ecommerce.controller;
 
 import com.pfa.ecommerce.entities.dto.CreateDevis;
+import com.pfa.ecommerce.model.Article;
 import com.pfa.ecommerce.model.Devis;
 import com.pfa.ecommerce.model.Personne;
 import com.pfa.ecommerce.repository.DevisArticleRepository;
@@ -33,6 +34,15 @@ public class DevisController {
     DevisArticleRepository devisArticleRepository;
     @Autowired
     PersonneRepository personneRepository;
+  /*  @GetMapping("/search")
+    public ResponseEntity<Page<Devis>> listBysearch(@ParameterObject Pageable pageable, @RequestParam  String search) {
+        Page<Devis> devisPage = devisService.getSearch(pageable,search);
+        if (devisPage.hasContent()) {
+            return ResponseEntity.ok(devisPage);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+    }*/
 
     @GetMapping
     public ResponseEntity<Page<Devis>> list(@ParameterObject Pageable pageable) {

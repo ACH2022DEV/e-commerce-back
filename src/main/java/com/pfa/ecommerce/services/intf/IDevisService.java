@@ -14,4 +14,5 @@ public interface IDevisService {
     public Devis save(CreateDevis devis);
     public Optional<Devis> findById(Long id);
     public Page<Devis> getAll(Pageable pageable) ;
+//    public Page<Devis> getSearch(Pageable pageable, String keyword);
 }
