@@ -17,7 +17,7 @@ public interface ArticleFactureMapper {
 //par moi
     ArticleFacture mapToModel(ArticleFactureEntity facture);
 
-     @Mapping(source="facture", target = "facture", ignore = true)
+    @Mapping(source="facture", target = "facture", ignore = true)
     @Mapping(source = "article.avis", target = "article.avis", ignore = true)
 //par moi
 

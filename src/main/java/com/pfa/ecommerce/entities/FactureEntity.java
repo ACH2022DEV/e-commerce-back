@@ -36,4 +36,5 @@ public class FactureEntity implements Serializable {
     @OneToMany(mappedBy = "facture")
     private List<ArticleFactureEntity> articles;
 
+
 }

@@ -25,4 +25,5 @@ public class Facture {
     private Personne personne;
     @Schema(name="articles", description = " liste de  articles incluts de cette facture")
     private List<ArticleFacture> articles;
+
 }

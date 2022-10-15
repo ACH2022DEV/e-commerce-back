@@ -77,4 +77,6 @@ public class PersonneEntity implements Serializable {
     private Boolean actif;
     @OneToMany(mappedBy = "personne")
     private List<AvisEntity> avis;
+
+
 }
