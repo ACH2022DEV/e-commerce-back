@@ -11,6 +11,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(uses = {ArticleMapper.class,PersonneMapper.class})
+
 public interface AvisMapper {
     AvisMapper INSTANCE = Mappers.getMapper(AvisMapper.class);
     @Mapping(source = "article", target = "article", ignore = true)//par moi

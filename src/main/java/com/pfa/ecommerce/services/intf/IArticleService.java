@@ -17,4 +17,5 @@ public interface IArticleService {
 
 
    public Page<Article> getSearch(Pageable pageable,String keyword);
+    public Page<Article> SearchByNbAvis(Pageable pageable,Integer NbAvis);
 }

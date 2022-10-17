@@ -13,6 +13,7 @@ public class ECommerceApplication{
 	 * @Autowired JdbcTemplate jdbcTemplate;
 	 */
 	public static void main(String[] args) {
+
 		SpringApplication.run(ECommerceApplication.class, args);
 	}
 	/*

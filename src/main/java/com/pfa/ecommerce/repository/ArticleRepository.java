@@ -24,6 +24,16 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> , 
     @Query("select art from ArticleEntity art where "+ "CONCAT( art.description,art.codeArticle,art.paysOrigine,art.prix,art.tva,art.remise,art.quantite) "+"LIKE CONCAT( '%',:keyword,'%')")
     public Page<ArticleEntity> findBySearch(Pageable pageable,String keyword);
 
+
+  /*  @Query("select art from ArticleEntity art where  art.description Like(:keyword)")
+    public Page<ArticleEntity> findByDescription(Pageable pageable,String keyword);
+    */
   /*  @Query(value = "select i from ArticleEntity i  where  i.images.id in (articleId)")
     public List<ArticleEntity> findbyArticleId1(Long articleId);*/
+
+//    @Query("select art from ArticleEntity art where art.avis.etoile =(select avis from AvisEntity avis where avis.etoile= :NbAvis)")
+//    @Query("select avis from ArticleEntity avis where  EXISTS (select avis from AvisEntity avis where avis.etoile= :NbAvis)")
+    public Page<ArticleEntity> findByAvis(Pageable pageable,Integer NbAvis);
+
+
 }
