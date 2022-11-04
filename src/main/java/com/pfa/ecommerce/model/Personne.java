@@ -1,9 +1,6 @@
 package com.pfa.ecommerce.model;
 
-import com.pfa.ecommerce.entities.ERole;
-import com.pfa.ecommerce.entities.ImagesEntity;
-import com.pfa.ecommerce.entities.PanierEntity;
-import com.pfa.ecommerce.entities.RoleEntity;
+import com.pfa.ecommerce.entities.*;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -62,5 +59,7 @@ public class Personne {
     private List<Panier> paniers;
     @Schema (name="images", description = "la liste des images de  personne ")
     private List<Image> images;
+    @Schema (name="Avis", description = "la liste des Avis de  personne ")
     private List<Avis> avis;
+    private List<Commande> cammandes;
 }
