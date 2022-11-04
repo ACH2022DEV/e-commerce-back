@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(uses = {ImagesMapper.class,DevisArticleMapper.class,ArticleFactureMapper.class,PanierMapper.class, AvisMapper.class})
+@Mapper(uses = {ImagesMapper.class,DevisArticleMapper.class,ArticleFactureMapper.class,PanierMapper.class, AvisMapper.class, CommandeMapper.class})
 public interface ArticleMapper {
     ArticleMapper INSTANCE = Mappers.getMapper(ArticleMapper.class);
     Article mapToModel(ArticleEntity article);

@@ -12,9 +12,17 @@ import java.util.List;
 
 public interface CommandeMapper {
     CommandeMapper INSTANCE = Mappers.getMapper(CommandeMapper.class);
+    @Mapping(source = "personne", target = "personne", ignore = true)//par moi
+
     Commande mapToModel(CommandeEntity commande);
+    @Mapping(source = "personne", target = "personne", ignore = true)//par moi
+
     CommandeEntity mapToEntity(Commande commande);
+  //  @Mapping(source = "personne", target = "personne", ignore = true)//par moi
+
     List<CommandeEntity> mapToEntities(List<Commande> commandeList);
+ @Mapping(source = "personne", target = "personne", ignore = true)//par moi
+
     List<Commande> mapToModels(List<CommandeEntity> commandeList);
 
 }

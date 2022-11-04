@@ -15,11 +15,15 @@ import java.util.List;
 public interface AvisMapper {
     AvisMapper INSTANCE = Mappers.getMapper(AvisMapper.class);
     @Mapping(source = "article", target = "article", ignore = true)//par moi
+   @Mapping(source = "personne.cammandes", target = "personne.cammandes", ignore = true)//par moi
+
     @Mapping(source = "personne.paniers", target = "personne.paniers", ignore = true)//par moi
     @Mapping(source = "personne.role", target = "personne.role", ignore = true)//par moi
     @Mapping(source = "personne.avis", target = "personne.avis", ignore = true)//par moi
 
     Avis mapToModel(AvisEntity avis);
+    @Mapping(source = "personne.cammandes", target = "personne.cammandes", ignore = true)//par moi
+
     @Mapping(source = "personne.paniers", target = "personne.paniers", ignore = true)//par moi
     @Mapping(source = "article", target = "article", ignore = true)//par moi
     @Mapping(source = "personne.role", target = "personne.role", ignore = true)//par moi
@@ -29,6 +33,8 @@ public interface AvisMapper {
 
 
     AvisEntity mapToEntity(Avis avis);
+    @Mapping(source = "personne.cammandes", target = "personne.cammandes", ignore = true)//par moi
+
     @Mapping(source = "personne.paniers", target = "personne.paniers", ignore = true)//par moi
     @Mapping(source = "article", target = "article", ignore = true)//par moi
     @Mapping(source = "personne.role", target = "personne.role", ignore = true)//par moi
@@ -36,6 +42,8 @@ public interface AvisMapper {
 
 
     List<AvisEntity> mapToEntities(List<Avis> avisList);
+    @Mapping(source = "personne.cammandes", target = "personne.cammandes", ignore = true)//par moi
+
     @Mapping(source = "personne.paniers", target = "personne.paniers", ignore = true)//par moi
     @Mapping(source = "article", target = "article", ignore = true)//par moi
     @Mapping(source = "personne.role", target = "personne.role", ignore = true)//par moi
