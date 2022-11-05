@@ -1,12 +1,10 @@
 package com.pfa.ecommerce.entities;
-import com.pfa.ecommerce.model.Article;
-import com.pfa.ecommerce.model.Personne;
+
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name="Commande")
@@ -33,7 +31,7 @@ public class CommandeEntity implements Serializable {
     @JoinColumn(name = "articleId")
     private ArticleEntity article;
     private Integer montantTotal;
-
+    private Integer quantity;
     private String Lepayment;
     @Column(nullable=false)
     private String ville;

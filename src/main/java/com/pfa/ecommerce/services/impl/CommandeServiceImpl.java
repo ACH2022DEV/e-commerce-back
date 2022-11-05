@@ -53,7 +53,7 @@ public class CommandeServiceImpl implements ICommandeService {
                     commandeEntityToSave.setLepayment(ajouterCommande.getLepayment());
                     commandeEntityToSave.setTel(ajouterCommande.getTel());
                     commandeEntityToSave.setVille(ajouterCommande.getVille());
-                    commandeEntityToSave.setMontantTotal(ajouterCommande.getMontantTotal());
+                    commandeEntityToSave.setQuantity(ajouterCommande.getQuantity());
                     commandeEntityToSave.setDateLivraison(ajouterCommande.getDateLivraison());
                     commandeEntityToSave.setAdress(ajouterCommande.getAdress());
                     commandeEntityToSave.setCodePostal(ajouterCommande.getCodePostal());

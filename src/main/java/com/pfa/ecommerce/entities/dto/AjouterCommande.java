@@ -20,6 +20,7 @@ public class AjouterCommande {
     private LocalDateTime dateCommande;
     private String dateLivraison;
     private Integer montantTotal;
+    private Integer quantity;
     private String Lepayment;
     private String ville;
     private List<CommandezDto> commande;

@@ -40,6 +40,18 @@ public class PersonneServiceImpl implements IPersonneService {
 
         return new PageImpl<>(personneListList, pageable, personneEntityPage.getTotalElements());
     }
+ /*   @Override
+    public Page<Personne> Searchcmmandes(Pageable pageable) {
+
+        Page<PersonneEntity> personneEntityPage = personneRepository.SearchCommandes(pageable);
+        List<PersonneEntity> personneEntityList = personneEntityPage.stream().toList();
+        List<Personne> personneListList =
+                PersonneMapper.INSTANCE.mapToModels(personneEntityList.stream().toList());
+
+
+        return new PageImpl<>(personneListList, pageable, personneEntityPage.getTotalElements());
+    }*/
+
 
     @Override
     public Page<Personne> getAll(Pageable pageable) {

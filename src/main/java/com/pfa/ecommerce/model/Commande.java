@@ -35,10 +35,14 @@ public class Commande {
     private String dateLivraison;
     @Schema(name="article", description = "l'objet article de cette commande")
     private Article  article;
-    @Schema(name="montantTotal", description = "le montant total de cette facture  ")
+    @Schema(name="montantTotal", description = "le montant total de cette commande  ")
     @Min(1)
     private Integer montantTotal;
-    @Schema(name="montantTotal", description = "le montant total de cette facture  ")
+    @Schema(name="quantity", description = "le quantity  de cette commande  ")
+
+    private Integer quantity;
+
+    @Schema(name="Lepayment", description = "le Lepayment  de cette commande  ")
     private String Lepayment;
     @Schema(name="ville", description = "le ville de client ")
     @NotBlank

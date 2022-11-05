@@ -53,6 +53,18 @@ public class PersonneController {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
 	}
+	/*@GetMapping("/searchCommandes")
+	@Operation(summary = "Récupérer la liste des personnes qui ont du commandes ")
+	public ResponseEntity<Page<Personne>> listCommandes(
+			@ParameterObject Pageable pageable ){
+
+		Page<Personne> personnePage = personneService.Searchcmmandes(pageable);
+		if (personnePage.hasContent()){
+			return ResponseEntity.ok(personnePage);
+		} else {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}
+	}*/
 
 	@GetMapping
 	public ResponseEntity<Page<Personne>> list(@ParameterObject Pageable pageable) {

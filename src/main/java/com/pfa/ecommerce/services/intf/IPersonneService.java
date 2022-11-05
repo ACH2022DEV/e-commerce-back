@@ -30,4 +30,5 @@ public interface IPersonneService {
 
     public boolean delete(Long id);
     public Page<Personne> getSearch(Pageable pageable,String keyword);
+   //public Page<Personne> Searchcmmandes(Pageable pageable);
 }

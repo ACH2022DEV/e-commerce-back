@@ -13,19 +13,15 @@ import java.util.List;
 public interface PersonneMapper {
 
     PersonneMapper INSTANCE = Mappers.getMapper(PersonneMapper.class);
-    //@Mapping(source = "commandes", target = "commandes", ignore = true)//par moi
-  //  @Mapping(source = "avis", target = "avis", ignore = true)//par moi
+
     Personne mapToModel(PersonneEntity personne);
-  //  @Mapping(source = "commandes", target = "commandes", ignore = true)//par moi
-  //@Mapping(source = "avis", target = "avis", ignore = true)//par moi
+
 
     PersonneEntity mapToEntity(Personne personne);
-   // @Mapping(source = "commandes", target = "commandes", ignore = true)//par moi
-  // @Mapping(source = "avis", target = "avis", ignore = true)//par moi
+
 
     List<PersonneEntity> mapToEntities(List<Personne> personnes);
-    //@Mapping(source = "commandes", target = "commandes", ignore = true)//par moi
-    //@Mapping(source = "avis", target = "avis", ignore = true)//par moi
+    
 
     List<Personne> mapToModels(List<PersonneEntity> personnes);
     // nouveau ligne

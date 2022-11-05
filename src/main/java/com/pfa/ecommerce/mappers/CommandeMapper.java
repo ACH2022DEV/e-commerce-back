@@ -18,7 +18,7 @@ public interface CommandeMapper {
     @Mapping(source = "personne", target = "personne", ignore = true)//par moi
 
     CommandeEntity mapToEntity(Commande commande);
-  //  @Mapping(source = "personne", target = "personne", ignore = true)//par moi
+   //@Mapping(source = "personne", target = "personne", ignore = true)//par moi
 
     List<CommandeEntity> mapToEntities(List<Commande> commandeList);
  @Mapping(source = "personne", target = "personne", ignore = true)//par moi
