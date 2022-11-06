@@ -26,8 +26,7 @@ public class ArticleController {
 
     @Autowired
     IArticleService articelService;
-    @Autowired
-    IArticleService articelService2;
+
     @Autowired
     IimagesService iimagesService;
     @Autowired
@@ -53,10 +52,18 @@ public class ArticleController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
     }
-
+    @GetMapping("/searchByRemise")
+    public ResponseEntity<Page<Article>> findByRemise(@ParameterObject Pageable pageable,@RequestParam  Integer remise) {
+        Page<Article> articePage = articelService.SearchByRmise(pageable,remise);
+        if (articePage.hasContent()) {
+            return ResponseEntity.ok(articePage);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+    }
     @GetMapping("/searchByAvis")
     public ResponseEntity<Page<Article>> findByNbAvis(@ParameterObject Pageable pageable,@RequestParam  Integer NbAvis) {
-        Page<Article> articePage = articelService2.SearchByNbAvis(pageable,NbAvis);
+        Page<Article> articePage = articelService.SearchByNbAvis(pageable,NbAvis);
         if (articePage.hasContent()) {
             return ResponseEntity.ok(articePage);
         } else {

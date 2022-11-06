@@ -35,5 +35,8 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> , 
 //    @Query("select avis from ArticleEntity avis where  EXISTS (select avis from AvisEntity avis where avis.etoile= :NbAvis)")
     public Page<ArticleEntity> findByAvis(Pageable pageable,Integer NbAvis);
 
+    @Query("select art from ArticleEntity art where  art.remise <=:remise")
+    public Page<ArticleEntity> findByremise(Pageable pageable,Integer remise);
+
 
 }

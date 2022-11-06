@@ -38,10 +38,10 @@ public class ArticleServiceImpl  implements IArticleService {
 
 
 
-/*
+
     @Override
-    public Page<Article> SearchByNbAvis(Pageable pageable,Integer NbAvis) {
-        Page<ArticleEntity> articleEntityPage = repository.findByAvis(pageable,NbAvis);
+    public Page<Article> SearchByRmise(Pageable pageable,Integer remise) {
+        Page<ArticleEntity> articleEntityPage = repository.findByremise(pageable,remise);
         List<ArticleEntity> articleEntityList = articleEntityPage.stream().toList();
         List<Article> articleListList =
                 ArticleMapper.INSTANCE.mapToModels(articleEntityList.stream().toList());
@@ -49,7 +49,7 @@ public class ArticleServiceImpl  implements IArticleService {
 
         return new PageImpl<>(articleListList, pageable, articleEntityPage.getTotalElements());
     }
-*/
+
 @Override
 public Page<Article> SearchByNbAvis(Pageable pageable,Integer NbAvis) {
     Page<ArticleEntity> articleAvisPage = repository.findByAvis(pageable,NbAvis);
