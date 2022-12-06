@@ -1,5 +1,6 @@
 package com.pfa.ecommerce.controller;
 
+import com.pfa.ecommerce.model.Article;
 import com.pfa.ecommerce.model.Facture;
 import com.pfa.ecommerce.model.Image;
 import com.pfa.ecommerce.model.Personne;
@@ -89,10 +90,21 @@ public class PersonneController {
 		personne.setImages(new ArrayList<>(imgs));
 		return personneService.save(personne);
 	}
+	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = {
+			MediaType.MULTIPART_FORM_DATA_VALUE})
+	public Personne update(@RequestPart("personne") Personne personne,
+						  @RequestPart("files") MultipartFile[] files) throws IOException {
 
-	@PutMapping
+		Set<Image> imgs = iimagesService.uploadImage(files);
+		personne.setImages(new ArrayList<>(imgs));
+
+
+		return personneService.update(personne);
+
+	}
+	/*@PutMapping
 	public Personne update(@RequestBody Personne personne) {
 		return personneService.update(personne);
-	}
+	}*/
 
 }

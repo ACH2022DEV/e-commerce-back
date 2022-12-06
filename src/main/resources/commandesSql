@@ -6,6 +6,28 @@ delete from r_devis_article where codedevis is  null;
 delete from r_devis_article where code_article is  null;
 select * from r_devis_article where code_article is null;
 select * from article;
+Delete  from article;
+Delete  from image_article;
+select *  from image_article;
+select *  from avis;
+Delete  from avis;
+Delete  from panier;
+Delete  from r_facture_article;
+Delete  from r_devis_article ;
+Delete  from commande  ;
+Delete  from personne  ;
+Delete  from facture   ;
+Delete  from devis    ;
+
+
+
+
+
+
+
+
+
+
 
 INSERT INTO public.image_article(code_article, image_id)	VALUES (35, 25);
 INSERT INTO public.image_article(code_article, image_id)	VALUES (35, 26);
