@@ -16,7 +16,10 @@ Delete  from r_facture_article;
 Delete  from r_devis_article ;
 Delete  from commande  ;
 Delete  from personne  ;
-Delete  from facture   ;
+select  * from personne  ;
+Delete  from contact      ;
+
+Delete  from user_roles    ;
 Delete  from devis    ;
 
 

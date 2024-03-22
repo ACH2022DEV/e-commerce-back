@@ -1,11 +1,7 @@
 package com.pfa.ecommerce.services.impl;
 
-import com.pfa.ecommerce.entities.FactureEntity;
 import com.pfa.ecommerce.entities.PersonneEntity;
-import com.pfa.ecommerce.mappers.ArticleMapper;
-import com.pfa.ecommerce.mappers.FactureMapper;
 import com.pfa.ecommerce.mappers.PersonneMapper;
-import com.pfa.ecommerce.model.Facture;
 import com.pfa.ecommerce.model.Personne;
 import com.pfa.ecommerce.repository.PersonneRepository;
 import com.pfa.ecommerce.services.intf.IPersonneService;
@@ -16,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -84,6 +79,11 @@ public class PersonneServiceImpl implements IPersonneService {
         }
         return false;
     }
-
+    public boolean ifEmailExist(String mail){
+        return personneRepository.existsByEmail(mail);
+    }
+    public PersonneEntity getUserByMail(String mail){
+        return personneRepository.findByEmail(mail);
+    }
 
 }

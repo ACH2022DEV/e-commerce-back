@@ -1,5 +1,6 @@
 package com.pfa.ecommerce.services.intf;
 
+import com.pfa.ecommerce.entities.PersonneEntity;
 import com.pfa.ecommerce.model.Personne;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,4 +32,6 @@ public interface IPersonneService {
     public boolean delete(Long id);
     public Page<Personne> getSearch(Pageable pageable,String keyword);
    //public Page<Personne> Searchcmmandes(Pageable pageable);
+   public boolean ifEmailExist(String mail);
+    public PersonneEntity getUserByMail(String mail);
 }

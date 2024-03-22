@@ -21,12 +21,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import java.util.ArrayList;
 import java.util.List;
+//importation  pour auth2.0
 
+//fin de l'importation
 @Configuration
 @EnableWebSecurity
+//@EnableOAuth2Client
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
     private final String gerantRole = ERole.ROLE_GERANT.name();
@@ -74,7 +76,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .antMatchers("/client/**")
                 .permitAll().antMatchers("/compte/**")
                 .hasAnyAuthority(userRole, adminRole)
-                .antMatchers("/auth/**").permitAll().anyRequest().authenticated();
+                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/social/**")
+                .permitAll().anyRequest().authenticated();
+
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
