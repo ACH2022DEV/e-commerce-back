@@ -82,6 +82,9 @@ public class PersonneServiceImpl implements IPersonneService {
     public boolean ifEmailExist(String mail){
         return personneRepository.existsByEmail(mail);
     }
+    public boolean ifUsernameExist(String username){
+        return personneRepository.existsByUsername(username);
+    }
     public PersonneEntity getUserByMail(String mail){
         return personneRepository.findByEmail(mail);
     }

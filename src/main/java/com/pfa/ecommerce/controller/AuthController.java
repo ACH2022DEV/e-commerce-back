@@ -12,6 +12,8 @@ import com.pfa.ecommerce.security.payload.response.JwtResponse;
 import com.pfa.ecommerce.security.payload.response.MessageResponse;
 import com.pfa.ecommerce.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,9 +22,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.Cookie;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -44,20 +48,33 @@ public class AuthController {
     JwtUtils jwtUtils;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest
+           // , HttpServletResponse response
+    ) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-// La méthode generateJwtCookie permet d'encapsuler le jwt dans un cookie HTTP only :
+
+// Créez un cookie HTTP-only contenant le JWT
+      /* Cookie cookie = new Cookie("CookiesData", jwt);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false); // Assurez-vous que votre application utilise HTTPS
+        cookie.setMaxAge((int) jwtUtils.getJwtExpirationInMs());
+        cookie.setPath("/");
+        cookie.setDomain("localhost");
+        cookie.setMaxAge(-1);
+        response.addCookie(cookie);
+        System.out.println("response"+ response);*/
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(
                 new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+
     }
 
     @PostMapping(value = "/register", consumes = "application/json")

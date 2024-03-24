@@ -33,5 +33,7 @@ public interface IPersonneService {
     public Page<Personne> getSearch(Pageable pageable,String keyword);
    //public Page<Personne> Searchcmmandes(Pageable pageable);
    public boolean ifEmailExist(String mail);
+    public boolean ifUsernameExist(String username);
+
     public PersonneEntity getUserByMail(String mail);
 }
